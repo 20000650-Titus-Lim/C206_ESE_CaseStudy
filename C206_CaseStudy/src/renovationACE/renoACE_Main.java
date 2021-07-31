@@ -11,6 +11,7 @@ public class renoACE_Main {
 	
 	//Menu Admin
 	private Menu menAdmin = new Menu();
+	private Menu menAdminPackage = new Menu();
 
 	public static void main(String[] args) {
 		renoACE_Main r = new renoACE_Main();
@@ -18,9 +19,16 @@ public class renoACE_Main {
 	}
 	
 	private void run() {
+		//Login Menu generated
 		genMenuLogin();
+		
+		//User Menu generated
 		genMenuUser();
+		
+		//Admin Menu generated
 		genMenuAdmin();
+		genMenuAdminPackage(); //Manage Packages
+		
 		int choice = -1;
 		
 		while(choice != 4) {
@@ -79,7 +87,7 @@ public class renoACE_Main {
 	}
 	
 	private void runAdmin() {
-int choice = -1;
+		int choice = -1;
 		
 		while(choice != 6) {
 			menAdmin.printMenu("Reno ACE App - ADMIN");
@@ -121,6 +129,38 @@ int choice = -1;
 		
 	}
 	
+	//Manage Packages - Admin sub-menu
+	private void managePackage() {
+		int choice = -1;
+		
+		while(choice != 4) {
+			menUser.printMenu("Reno ACE App - Manage Packages");
+			choice = Validator.readIntPos("Enter choice > ");
+			
+			switch(choice) {
+			case 1: 
+				//TODO: Add Package
+				
+				break;
+			case 2: 
+				//TODO: View All Packages
+				
+				break;
+			case 3:
+				//TODO: Delete Package
+				
+				break;
+			case 4:
+				//Logout
+				System.out.println("Logged out of account");
+				break;
+			default:
+				System.out.println("Invalid Choice");
+				break;
+			}
+		}
+	}
+	
 	//Generates Menu for login screen
 	private void genMenuLogin() {
 		menLogin.addOption("User Login");
@@ -144,6 +184,14 @@ int choice = -1;
 		menAdmin.addOption("Manage Quotation");
 		menAdmin.addOption("Manage Appointment");
 		menAdmin.addOption("Quit");
+	}
+	
+	//Generates Manage Package - Admin
+	private void genMenuAdminPackage() {
+		menAdminPackage.addOption("Add Package");
+		menAdminPackage.addOption("View All Packages");
+		menAdminPackage.addOption("Delete Package");
+		menAdminPackage.addOption("Quit");
 	}
 	
 
