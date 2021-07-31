@@ -1,5 +1,7 @@
 package renovationACE;
 
+import java.util.ArrayList;
+
 import ExrionsLibrary.*;
 
 public class renoACE_Main {
@@ -12,6 +14,13 @@ public class renoACE_Main {
 	//Menu Admin
 	private Menu menAdmin = new Menu();
 	private Menu menAdminPackage = new Menu();
+	
+	//ArrayLists for various things
+	//TODO: Add objects into ArrayLists
+	ArrayList<Account> accountList = new ArrayList<Account>();
+	ArrayList<RenoPackage> packageList = new ArrayList<RenoPackage>();
+	ArrayList<Quote> quoteList = new ArrayList<Quote>();
+	ArrayList<Appointment> apptList = new ArrayList<Appointment>();
 
 	public static void main(String[] args) {
 		renoACE_Main r = new renoACE_Main();
