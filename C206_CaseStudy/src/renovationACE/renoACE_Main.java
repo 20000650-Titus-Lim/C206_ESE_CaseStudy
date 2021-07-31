@@ -15,13 +15,23 @@ public class renoACE_Main {
 		switch(choice) {
 		case 1:
 			//TODO: Login for Users
+			runUser();
 			break;
 		case 2:
 			//TODO: Login for Admins
+			runAdmin();
 			break;
 		default:
 			System.out.println("Invalid Choice");
 		}
+	}
+	
+	private void runUser() {
+		
+	}
+	
+	private void runAdmin() {
+		
 	}
 
 }
