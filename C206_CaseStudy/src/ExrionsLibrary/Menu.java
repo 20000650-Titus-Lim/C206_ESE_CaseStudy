@@ -19,7 +19,7 @@ public class Menu {
 	* @param menu : An ArrayList, preferably from MenuObjects that holds the Strings to be printed
 	* @param title : The main title of the menu
 	*/
-	public static void printMenu(String title) {
+	public void printMenu(String title) {
 		printTitle(title);
 		for(int i = 0; i < optionList.size(); i++) {
 			System.out.printf("%d. %s\n", i + 1, optionList.get(i));
