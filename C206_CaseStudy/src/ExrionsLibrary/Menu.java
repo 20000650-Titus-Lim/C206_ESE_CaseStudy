@@ -12,7 +12,7 @@ import java.util.ArrayList;
 */
 
 public class Menu {	
-	private static ArrayList<String> optionList = new ArrayList<String>();
+	private ArrayList<String> optionList = new ArrayList<String>();
 	
 	/**
 	* Prints a menu
