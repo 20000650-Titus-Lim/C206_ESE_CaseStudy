@@ -1,9 +1,10 @@
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import ExrionsLibrary.*;
-import renovationACE.RenoPackage;
+import renovationACE.*;
 
 public class C206_CaseStudy {
 	//Main Menu (Login)
@@ -17,7 +18,7 @@ public class C206_CaseStudy {
 	private Menu menAdminPackage = new Menu();
 	
 	//ArrayLists for various things
-	//TODO: Add objects into ArrayLists
+	//TODO: Add objects into ArrayLists in genArrList()
 //	ArrayList<Account> accountList = new ArrayList<Account>();
 	ArrayList<RenoPackage> packageList = new ArrayList<RenoPackage>();
 //	ArrayList<Quote> quoteList = new ArrayList<Quote>();
@@ -29,6 +30,8 @@ public class C206_CaseStudy {
 	}
 	
 	private void run() {
+		genArrList();
+		
 		//Login Menu generated
 		genMenuLogin();
 		
@@ -110,7 +113,7 @@ public class C206_CaseStudy {
 				break;
 			case 2: 
 				//TODO: Manage Package
-				
+				managePackage();
 				break;
 			case 3: 
 				//TODO: Manage Request for Quotation
@@ -144,12 +147,34 @@ public class C206_CaseStudy {
 		int choice = -1;
 		
 		while(choice != 4) {
-			menUser.printMenu("Reno ACE App - Manage Packages");
+			menAdminPackage.printMenu("Reno ACE App - Manage Packages");
 			choice = Validator.readIntPos("Enter choice > ");
 			
 			switch(choice) {
 			case 1: 
 				//TODO: Add Package
+				Menu.printTitle("Add Package");
+				int code = getPackageCode();
+				String desc = Validator.readString("Enter Description > ");
+				String start = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
+				String end = Validator.readString("Enter End Date (YYYY-MM-DD) > ");
+				double value = Validator.readDoublePos("Enter Value (Price) of Package > ");
+
+				String regexDate = "(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
+				String newStartDate = "";
+				String newEndDate = "";
+				
+				while(!start.matches(regexDate) || !newStartDate.equals("0")) {
+					System.out.println("Invalid date format, please try again or enter 0 to exit.");
+					newStartDate = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
+				}
+				
+				while(!end.matches(regexDate) || !newEndDate.equals("0")) {
+					System.out.println("Invalid date format, please try again or enter 0 to exit.");
+					newEndDate = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
+				}
+				
+				//TODO: Lambda????
 				
 				break;
 			case 2: 
@@ -169,6 +194,18 @@ public class C206_CaseStudy {
 				break;
 			}
 		}
+	}
+
+	private int getPackageCode() {
+		int code = 1;
+		for (RenoPackage p : packageList) {
+			if (p.getCode() != code) {
+				break;
+			} else {
+				code++;
+			}
+		}
+		return code;
 	}
 	
 	//Generates Menu for login screen
@@ -204,5 +241,11 @@ public class C206_CaseStudy {
 		menAdminPackage.addOption("Quit");
 	}
 	
-
+	//Generates ArrayList data
+	private void genArrList() {
+		//packageList
+		packageList.add(new RenoPackage(1, "Majulah Package", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 8, 31), 20000));
+		packageList.add(new RenoPackage(2, "New Year Package", LocalDate.of(2021, 12, 31), LocalDate.of(2022, 1, 12), 35000));
+		packageList.add(new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28), LocalDate.of(2021, 11, 16), 148000));
+	}
 }
