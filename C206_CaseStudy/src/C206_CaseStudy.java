@@ -341,7 +341,7 @@ public class C206_CaseStudy {
 				char decision = Helper.readChar("Do you want to delete this appointment? (Y/N) > ");
 				if (decision == 'y' || decision == 'Y') {
 					apptList.remove(i);
-					output = "Appointment deleted!";
+					output = "Appointment successfully deleted!";
 				}
 				break;
 			} else {
