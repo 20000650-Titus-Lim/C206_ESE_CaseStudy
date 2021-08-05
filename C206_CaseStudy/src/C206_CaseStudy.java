@@ -526,11 +526,11 @@ public class C206_CaseStudy {
 	}
 
 	// Option 3 Deleting of the Appointment
-	public static void deleteAppointment(ArrayList<Appointment> apptList, int apptID) {
+	public static void deleteAppointment(ArrayList<Appointment> apptList, int x) {
 		String output = "";
 
 		for (int i = 0; i < apptList.size(); i++) {
-			if (apptList.get(i).getAppId() == apptID) {
+			if (apptList.get(i).getAppId() == x) {
 				char decision = Helper.readChar("Do you want to delete this appointment? (Y/N) > ");
 				if (decision == 'y' || decision == 'Y') {
 					apptList.remove(i);
