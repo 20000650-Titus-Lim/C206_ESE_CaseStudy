@@ -87,7 +87,7 @@ public class C206_CaseStudy {
 				break;
 			case 2:
 				// TODO: Manage Appointment
-
+				manageAppt();
 				break;
 			case 3:
 				// Logout
@@ -215,7 +215,7 @@ public class C206_CaseStudy {
 		return localDate;
 	}
 	
-	// Manage Appointments - Admin sub-menu
+	// Manage Appointments - Admin & Login sub-menu
 	private void manageAppt() {
 		int choice = -1;
 
@@ -301,6 +301,7 @@ public class C206_CaseStudy {
 		System.out.println("1. View Appointment");
 		System.out.println("2. Add Appointment");
 		System.out.println("3. Delete Appointment");
+		System.out.println("4. Quit");
 	}
 
 	// Option 1 Adding the Appointment
@@ -332,10 +333,13 @@ public class C206_CaseStudy {
 
 	// Option 2 Viewing all the Appointment
 	private void viewAllAppointment() {
-		String output = String.format("%-10s %-20s %-20s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
+		Helper.line(150, "-");
+		System.out.println("VIEW APPOINTMENT");
+		Helper.line(150, "-");
+		String output = String.format("%-10s %-25s %-25s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
 				"TIME", "ADDRESS");
 		for (int i = 0; i < apptList.size(); i++) {
-			output += String.format("%-10s %-20s %-20s %-15s %-15s %-30s\n", apptList.get(i).getAppId(),
+			output += String.format("%-10s %-25s %-25s %-15s %-15s %-30s\n", apptList.get(i).getAppId(),
 					apptList.get(i).getCustName(), apptList.get(i).getdName(), apptList.get(i).getDateofApp(),
 					apptList.get(i).getTimeofApp(), apptList.get(i).getAddress());
 		}
@@ -344,6 +348,7 @@ public class C206_CaseStudy {
 
 	// Option 3 Deleting of the Appointment
 	private void deleteAppointment() {
+		viewAllAppointment();
 		int apptID = Helper.readInt("Enter Appointment ID > ");
 		String output = "";
 
@@ -352,6 +357,7 @@ public class C206_CaseStudy {
 				char decision = Helper.readChar("Do you want to delete this appointment? (Y/N) > ");
 				if (decision == 'y' || decision == 'Y') {
 					apptList.remove(i);
+					output = "Appointment successfully deleted!";
 				}
 				break;
 			} else {
