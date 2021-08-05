@@ -126,7 +126,7 @@ public class C206_CaseStudy {
 				break;
 			case 5:
 				// TODO: Manage Appointment
-
+				manageAppt();
 				break;
 			case 6:
 				// Logout
@@ -187,8 +187,35 @@ public class C206_CaseStudy {
 
 				break;
 			case 4:
-				// Logout
-				System.out.println("Logged out of account");
+				// Exit
+				break;
+			default:
+				System.out.println("Invalid Choice");
+				break;
+			}
+		}
+	}
+	
+	// Manage Appointments - Admin sub-menu
+	private void manageAppt() {
+		int choice = -1;
+
+		while (choice != 4) {
+			apptMenu();
+			choice = Validator.readIntPos("Enter choice > ");
+
+			switch (choice) {
+			case 1:
+				viewAllAppointment();
+				break;
+			case 2:
+				addAppointment();
+				break;
+			case 3:
+				deleteAppointment();
+				break;
+			case 4:
+				// Exit
 				break;
 			default:
 				System.out.println("Invalid Choice");
