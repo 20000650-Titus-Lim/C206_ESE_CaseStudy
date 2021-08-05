@@ -154,29 +154,7 @@ public class C206_CaseStudy {
 			switch (choice) {
 			case 1:
 				// TODO: Add Package
-				Menu.printTitle("Add Package");
-				int code = getPackageCode();
-				String desc = Validator.readString("Enter Description > ");
-				String start = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
-				String end = Validator.readString("Enter End Date (YYYY-MM-DD) > ");
-				double value = Validator.readDoublePos("Enter Value (Price) of Package > ");
-
-				String regexDate = "(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
-				String newStartDate = "";
-				String newEndDate = "";
-
-				while (!start.matches(regexDate) || !newStartDate.equals("0")) {
-					System.out.println("Invalid date format, please try again or enter 0 to exit.");
-					newStartDate = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
-				}
-
-				while (!end.matches(regexDate) || !newEndDate.equals("0")) {
-					System.out.println("Invalid date format, please try again or enter 0 to exit.");
-					newEndDate = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
-				}
-
-				// TODO: Lambda????
-
+				managePackageAdd();				
 				break;
 			case 2:
 				// TODO: View All Packages
@@ -194,6 +172,47 @@ public class C206_CaseStudy {
 				break;
 			}
 		}
+	}
+
+	private void managePackageAdd() {
+		Menu.printTitle("Add Package");
+		int code = getPackageCode();
+		String desc = Validator.readString("Enter Description > ");
+		String start = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
+		String end = Validator.readString("Enter End Date (YYYY-MM-DD) > ");
+		double value = Validator.readDoublePos("Enter Value (Price) of Package > ");
+
+		String regexDate = "(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
+
+		dateCheck dc = (String date) -> date.matches(regexDate);
+		
+		LocalDate dateStart = dateChecker(dc, start);
+		LocalDate dateEnd = dateChecker(dc, end);
+		
+		packageList.add(new RenoPackage(code, desc, dateStart, dateEnd, value));
+	}
+	
+	private LocalDate dateChecker(dateCheck condition, String date) {
+		String newDate = "";
+		LocalDate localDate = null;
+		boolean newDateVal = false;
+		
+		while (!condition.checker(date)) {
+			System.out.println("Invalid date format, please try again");
+			newDate = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
+			
+			if(condition.checker(newDate)) {
+				localDate = LocalDate.parse(newDate);
+				newDateVal = true;
+				break;
+			}
+		}
+		
+		if(!newDateVal) {
+			localDate = LocalDate.parse(date);
+		}
+		
+		return localDate;
 	}
 	
 	// Manage Appointments - Admin sub-menu
@@ -272,12 +291,9 @@ public class C206_CaseStudy {
 	// Generates ArrayList data
 	private void genArrList() {
 		// packageList
-		packageList
-				.add(new RenoPackage(1, "Majulah Package", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 8, 31), 20000));
-		packageList.add(
-				new RenoPackage(2, "New Year Package", LocalDate.of(2021, 12, 31), LocalDate.of(2022, 1, 12), 35000));
-		packageList.add(new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28),
-				LocalDate.of(2021, 11, 16), 148000));
+		packageList.add(new RenoPackage(1, "Majulah Package", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 8, 31), 20000));
+		packageList.add(new RenoPackage(2, "New Year Package", LocalDate.of(2021, 12, 31), LocalDate.of(2022, 1, 12), 35000));
+		packageList.add(new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28),LocalDate.of(2021, 11, 16), 148000));
 	}
 
 	// ================================= Manage Appointment =====================================
