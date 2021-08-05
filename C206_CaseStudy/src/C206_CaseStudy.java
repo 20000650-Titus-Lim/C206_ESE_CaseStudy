@@ -14,11 +14,12 @@ public class C206_CaseStudy {
 
 	// Menu Admin
 	private Menu menAdmin = new Menu();
+	private Menu menAdminAccount = new Menu();
 	private Menu menAdminPackage = new Menu();
 
 	// ArrayLists for various things
 	// TODO: Add objects into ArrayLists in genArrList()
-//	ArrayList<Account> accountList = new ArrayList<Account>();
+	ArrayList<Account> accountList = new ArrayList<Account>();
 	ArrayList<RenoPackage> packageList = new ArrayList<RenoPackage>();
 //	ArrayList<Quote> quoteList = new ArrayList<Quote>();
 	ArrayList<Appointment> apptList = new ArrayList<Appointment>();
@@ -40,6 +41,7 @@ public class C206_CaseStudy {
 
 		// Admin Menu generated
 		genMenuAdmin();
+		genMenuAdminUser();
 		genMenuAdminPackage(); // Manage Packages
 
 		int choice = -1;
@@ -111,7 +113,7 @@ public class C206_CaseStudy {
 			switch (choice) {
 			case 1:
 				// TODO: Manage Customer
-
+				manageAccount();
 				break;
 			case 2:
 				// TODO: Manage Package
@@ -144,6 +146,82 @@ public class C206_CaseStudy {
 
 	}
 
+	private void manageAccount() {
+		int choice = -1;
+		while (choice != 4) {
+			menAdminAccount.printMenu("Reno ACE App - Manage Account");
+			choice = Validator.readIntPos("Enter choice > ");
+
+			switch (choice) {
+			case 1:
+				// TODO: Add Account
+				addAccount();
+				break;
+			case 2:
+				// TODO: View All User
+				viewUser();
+				break;
+			case 3:
+				// TODO: Delete Account
+				deleteAccount();
+				break;
+			case 4:
+				// Exit
+				break;
+			default:
+				System.out.println("Invalid Choice");
+				break;
+			}
+		}
+
+	}
+
+	// Code for getting account deatils from admin and Adding into the array list -
+	// Vedha
+	public void addAccount() {
+		String name = Helper.readString("Enter name: ");
+		String role = Helper.readString("Enter role: ");
+		String email = Helper.readString("Enter email: ");
+		String password = Helper.readString("Enter password: ");
+
+		Account Act1 = new Account(name, role, email, password);
+		accountList.add(Act1);
+
+		System.out.println(name + " Account Added!");
+
+	}
+
+	// code for view user - Vedha
+	public void viewUser() {
+		String viewUser = String.format("%-15s %-11s %-20s %-20s %-10s\n", "Acoount Name", "Role", "Email", "Password",
+				"Status");
+		for (int x = 0; x < accountList.size(); x++) {
+			viewUser += String.format("%-15s %-11s %-20s %-20s %-10s\n", accountList.get(x).getName(),
+					accountList.get(x).getRole(), accountList.get(x).getEmail(), accountList.get(x).getPassword(),
+					accountList.get(x).getStatus());
+		}
+		System.out.println(viewUser);
+	}
+
+	public void deleteAccount() {
+		viewUser();
+		String Inputname = Helper.readString("Enter account name t delete: ");
+		String output = "";
+		for (Account A : accountList) {
+			if (A.getName().equalsIgnoreCase(Inputname)) {
+				char decision = Helper.readChar("Do you want to delete this appointment? (Y/N) > ");
+				if (decision == 'y' || decision == 'Y') {
+					accountList.remove(A);
+					output = Inputname + " Account has been deleted!";
+				}
+				break;
+			} else {
+				output = Inputname + " Account invalid!";
+			}
+		}
+		System.out.println(output);
+	}
+
 	// Manage Packages - Admin sub-menu
 	private void managePackage() {
 		int choice = -1;
@@ -155,7 +233,7 @@ public class C206_CaseStudy {
 			switch (choice) {
 			case 1:
 				// TODO: Add Package
-				managePackageAdd();				
+				managePackageAdd();
 				break;
 			case 2:
 				// TODO: View All Packages
@@ -163,7 +241,7 @@ public class C206_CaseStudy {
 				break;
 			case 3:
 				// TODO: Delete Package
-				managePackageDelete();				
+				managePackageDelete();
 				break;
 			case 4:
 				// Exit
@@ -177,26 +255,28 @@ public class C206_CaseStudy {
 
 	private void managePackageDelete() {
 		Menu.printTitle("Delete Package");
-		
-		String output = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date", "Amount");
+
+		String output = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date",
+				"Amount");
 		int input = Validator.readIntPos("Enter package code > ");
 		int deleteCode = -1;
-		
-		for(RenoPackage p : packageList) {
-			if(input == p.getCode()) {
-				output += String.format("%-5d %-30s %-12s %-12s $%.2f\n", p.getCode(), p.getDesc(), p.getStartDate(), p.getEndDate(), p.getAmount());
+
+		for (RenoPackage p : packageList) {
+			if (input == p.getCode()) {
+				output += String.format("%-5d %-30s %-12s %-12s $%.2f\n", p.getCode(), p.getDesc(), p.getStartDate(),
+						p.getEndDate(), p.getAmount());
 				deleteCode = packageList.indexOf(p);
 			}
 		}
-		
+
 		System.out.println(output);
-		
+
 		char confirm = Validator.readChar("Confirm Deletion of Package with Code - " + (deleteCode + 1) + " (y/n) > ");
-		
-		if(!(confirm == 'y' || confirm == 'n')) {
+
+		if (!(confirm == 'y' || confirm == 'n')) {
 			System.out.println("Invalid choice");
 		} else {
-			if(confirm == 'y') {
+			if (confirm == 'y') {
 				packageList.remove(deleteCode);
 				System.out.println("Package Deleted.");
 			} else if (confirm == 'n') {
@@ -207,13 +287,15 @@ public class C206_CaseStudy {
 
 	private void managePackageView() {
 		Menu.printTitle("View All Packages");
-		
-		String output = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date", "Amount");
-		
-		for(RenoPackage p : packageList) {
-			output += String.format("%-5d %-30s %-12s %-12s $%.2f\n", p.getCode(), p.getDesc(), p.getStartDate(), p.getEndDate(), p.getAmount());
+
+		String output = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date",
+				"Amount");
+
+		for (RenoPackage p : packageList) {
+			output += String.format("%-5d %-30s %-12s %-12s $%.2f\n", p.getCode(), p.getDesc(), p.getStartDate(),
+					p.getEndDate(), p.getAmount());
 		}
-		
+
 		System.out.println(output);
 	}
 
@@ -228,36 +310,36 @@ public class C206_CaseStudy {
 		String regexDate = "(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
 
 		dateCheck dc = (String date) -> date.matches(regexDate);
-		
+
 		LocalDate dateStart = dateChecker(dc, start, "Start");
 		LocalDate dateEnd = dateChecker(dc, end, "End");
-		
+
 		packageList.add(new RenoPackage(code, desc, dateStart, dateEnd, value));
 	}
-	
+
 	private LocalDate dateChecker(dateCheck condition, String date, String type) {
 		String newDate = "";
 		LocalDate localDate = null;
 		boolean newDateVal = false;
-		
+
 		while (!condition.checker(date)) {
 			System.out.println("Invalid date format, please try again");
 			newDate = Validator.readString("Enter " + type + " Date (YYYY-MM-DD) > ");
-			
-			if(condition.checker(newDate)) {
+
+			if (condition.checker(newDate)) {
 				localDate = LocalDate.parse(newDate);
 				newDateVal = true;
 				break;
 			}
 		}
-		
-		if(!newDateVal) {
+
+		if (!newDateVal) {
 			localDate = LocalDate.parse(date);
 		}
-		
+
 		return localDate;
 	}
-	
+
 	// Manage Appointments - Admin & Login sub-menu
 	private void manageAppt() {
 		int choice = -1;
@@ -285,12 +367,13 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+
 	private void manageQuotation() {
 		int choice = -1;
 
 		while (choice != 4) {
-				QuotationMenu();
-				choice = Validator.readIntPos("Enter choice > ");
+			QuotationMenu();
+			choice = Validator.readIntPos("Enter choice > ");
 
 			switch (choice) {
 			case 1:
@@ -298,10 +381,8 @@ public class C206_CaseStudy {
 				break;
 			case 2:
 				Quotation Q = InputQuotation();
-				 C206_CaseStudy.addQuotation(QuotationList, Q);
-				 
+				C206_CaseStudy.addQuotation(QuotationList, Q);
 
-				
 				break;
 			case 3:
 				DeleteQuotation();
@@ -353,6 +434,14 @@ public class C206_CaseStudy {
 		menAdmin.addOption("Quit");
 	}
 
+	// Generates Manage User - Admin
+	private void genMenuAdminUser() {
+		menAdminAccount.addOption("Add Account");
+		menAdminAccount.addOption("View All User");
+		menAdminAccount.addOption("Delete Account");
+		menAdminAccount.addOption("Quit");
+	}
+
 	// Generates Manage Package - Admin
 	private void genMenuAdminPackage() {
 		menAdminPackage.addOption("Add Package");
@@ -364,12 +453,16 @@ public class C206_CaseStudy {
 	// Generates ArrayList data
 	private void genArrList() {
 		// packageList
-		packageList.add(new RenoPackage(1, "Majulah Package", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 8, 31), 20000));
-		packageList.add(new RenoPackage(2, "New Year Package", LocalDate.of(2021, 12, 31), LocalDate.of(2022, 1, 12), 35000));
-		packageList.add(new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28),LocalDate.of(2021, 11, 16), 148000));
+		packageList
+				.add(new RenoPackage(1, "Majulah Package", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 8, 31), 20000));
+		packageList.add(
+				new RenoPackage(2, "New Year Package", LocalDate.of(2021, 12, 31), LocalDate.of(2022, 1, 12), 35000));
+		packageList.add(new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28),
+				LocalDate.of(2021, 11, 16), 148000));
 	}
 
-	// ================================= Manage Appointment =====================================
+	// ================================= Manage Appointment
+	// =====================================
 	private void apptMenu() {
 		System.out.println("1. View Appointment");
 		System.out.println("2. Add Appointment");
@@ -440,81 +533,80 @@ public class C206_CaseStudy {
 		System.out.println(output);
 
 	}
-	
-	// ================================= Manage Quotation =====================================
-		private void QuotationMenu() {
-			System.out.println("1. View all Quotation");
-			System.out.println("2. Add Quotation");
-			System.out.println("3. Delete Quotation");
-			System.out.println("4. Quit");
-		}	
-		
-		 public static Quotation InputQuotation() {
-			 Quotation Q =null;
-			int RequestId = Helper.readInt("Enter Request ID > ");
-			int quotationId = Helper.readInt("Enter Quotation ID > ");
-			String RenoCategory = Helper.readString("Enter Category> ");
-			String items = Helper.readString("Enter Items > ");
-			String DesignerName = Helper.readString("Enter Designer name > ");
-			String StartDate = Helper.readString("Enter Date of Appointment (dd/mm/yyyy) > ");
-			int totalAmount = Helper.readInt("Enter total amount > $");
-			
-			//change to string
-			String RID = Integer.toString(RequestId);
-			String QID = Integer.toString(quotationId);
-			String AMT = Integer.toString(totalAmount);
 
-			if (RID.isEmpty() || QID.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || DesignerName.isEmpty() || StartDate.isEmpty() || AMT.isEmpty()) {
-				System.out.println("Unable to add Quotation!");
-			} else {
-				Q = new Quotation(RequestId, quotationId, RenoCategory, items, DesignerName,StartDate,totalAmount);
-				
-				
+	// ================================= Manage Quotation
+	// =====================================
+	private void QuotationMenu() {
+		System.out.println("1. View all Quotation");
+		System.out.println("2. Add Quotation");
+		System.out.println("3. Delete Quotation");
+		System.out.println("4. Quit");
+	}
+
+	public static Quotation InputQuotation() {
+		Quotation Q = null;
+		int RequestId = Helper.readInt("Enter Request ID > ");
+		int quotationId = Helper.readInt("Enter Quotation ID > ");
+		String RenoCategory = Helper.readString("Enter Category> ");
+		String items = Helper.readString("Enter Items > ");
+		String DesignerName = Helper.readString("Enter Designer name > ");
+		String StartDate = Helper.readString("Enter Date of Appointment (dd/mm/yyyy) > ");
+		int totalAmount = Helper.readInt("Enter total amount > $");
+
+		// change to string
+		String RID = Integer.toString(RequestId);
+		String QID = Integer.toString(quotationId);
+		String AMT = Integer.toString(totalAmount);
+
+		if (RID.isEmpty() || QID.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || DesignerName.isEmpty()
+				|| StartDate.isEmpty() || AMT.isEmpty()) {
+			System.out.println("Unable to add Quotation!");
+		} else {
+			Q = new Quotation(RequestId, quotationId, RenoCategory, items, DesignerName, StartDate, totalAmount);
+
 //						System.out.println("Quotation successfully added!");
-			}
-			return Q;
 		}
-		
-		 
-		 public static void addQuotation(ArrayList<Quotation> QuotationList, Quotation Q) {   
-				
-			 QuotationList.add(Q);
-			 System.out.println("Quotation successfully added!");
-			}
-		 
-		
-		private void DeleteQuotation() {
-			int QuotationID = Helper.readInt("Enter Quotation ID > ");
-			String output = "";
+		return Q;
+	}
 
-			for (int i = 0; i < QuotationList.size(); i++) {
-				if (QuotationList.get(i).getRequestId() == QuotationID) {
-					String ans = Helper.readString("Do you want to delete this appointment? (Y/N) > ");
-					if (ans.equalsIgnoreCase("y")) {
-						QuotationList.remove(i);
-						output = "Quotation successfully deleted!";
-					}
-					break;
-				} else {
-					output = "No such ID can be found!";
+	public static void addQuotation(ArrayList<Quotation> QuotationList, Quotation Q) {
+
+		QuotationList.add(Q);
+		System.out.println("Quotation successfully added!");
+	}
+
+	private void DeleteQuotation() {
+		int QuotationID = Helper.readInt("Enter Quotation ID > ");
+		String output = "";
+
+		for (int i = 0; i < QuotationList.size(); i++) {
+			if (QuotationList.get(i).getRequestId() == QuotationID) {
+				String ans = Helper.readString("Do you want to delete this appointment? (Y/N) > ");
+				if (ans.equalsIgnoreCase("y")) {
+					QuotationList.remove(i);
+					output = "Quotation successfully deleted!";
 				}
+				break;
+			} else {
+				output = "No such ID can be found!";
 			}
-			System.out.println(output);
 		}
-		
-		private void viewQuotation() {
-			Helper.line(80, "-");
-			System.out.println("VIEW Quotation");
-			Helper.line(80, "-");
-			String output = String.format("%-10s %-25s %-25s %-15s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID", "CATEGORY", "ITEMS",
-					"DESIGNER NAME ","START DATE", "TOTAL AMOUNT");
-			for (int i = 0; i < QuotationList.size(); i++) {
-				output += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
-						QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(), QuotationList.get(i).getItems(),
-						QuotationList.get(i).getDesignerName(), QuotationList.get(i).getStartDate(),QuotationList.get(i).getTotalAmount());
-			}
-			System.out.println(output);
+		System.out.println(output);
+	}
+
+	private void viewQuotation() {
+		Helper.line(80, "-");
+		System.out.println("VIEW Quotation");
+		Helper.line(80, "-");
+		String output = String.format("%-10s %-25s %-25s %-15s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID",
+				"CATEGORY", "ITEMS", "DESIGNER NAME ", "START DATE", "TOTAL AMOUNT");
+		for (int i = 0; i < QuotationList.size(); i++) {
+			output += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+					QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+					QuotationList.get(i).getItems(), QuotationList.get(i).getDesignerName(),
+					QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
 		}
-		
-	
+		System.out.println(output);
+	}
+
 }
