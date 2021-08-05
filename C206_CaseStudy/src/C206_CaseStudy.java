@@ -123,7 +123,7 @@ public class C206_CaseStudy {
 				break;
 			case 4:
 				// TODO: Manage Quotation
-
+				manageQuotation();
 				break;
 			case 5:
 				// TODO: Manage Appointment
@@ -297,7 +297,11 @@ public class C206_CaseStudy {
 				viewQuotation();
 				break;
 			case 2:
-				AddQuotation();
+				Quotation Q = InputQuotation();
+				 C206_CaseStudy.addQuotation(QuotationList, Q);
+				 
+
+				
 				break;
 			case 3:
 				DeleteQuotation();
@@ -445,10 +449,11 @@ public class C206_CaseStudy {
 			System.out.println("4. Quit");
 		}	
 		
-		private void AddQuotation() {
+		 public static Quotation InputQuotation() {
+			 Quotation Q =null;
 			int RequestId = Helper.readInt("Enter Request ID > ");
 			int quotationId = Helper.readInt("Enter Quotation ID > ");
-			String RenoCategory = Helper.readString("Enter Designer Name > ");
+			String RenoCategory = Helper.readString("Enter Category> ");
 			String items = Helper.readString("Enter Items > ");
 			String DesignerName = Helper.readString("Enter Designer name > ");
 			String StartDate = Helper.readString("Enter Date of Appointment (dd/mm/yyyy) > ");
@@ -462,14 +467,21 @@ public class C206_CaseStudy {
 			if (RID.isEmpty() || QID.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || DesignerName.isEmpty() || StartDate.isEmpty() || AMT.isEmpty()) {
 				System.out.println("Unable to add Quotation!");
 			} else {
-				QuotationList.add(new Quotation(RequestId, quotationId, RenoCategory, items, DesignerName,StartDate,totalAmount));
-				System.out.println("Quotation successfully added!");
+				Q = new Quotation(RequestId, quotationId, RenoCategory, items, DesignerName,StartDate,totalAmount);
+				
+				
+//						System.out.println("Quotation successfully added!");
 			}
-
-			
-
+			return Q;
 		}
 		
+		 
+		 public static void addQuotation(ArrayList<Quotation> QuotationList, Quotation Q) {   
+				
+			 QuotationList.add(Q);
+			 System.out.println("Quotation successfully added!");
+			}
+		 
 		
 		private void DeleteQuotation() {
 			int QuotationID = Helper.readInt("Enter Quotation ID > ");
