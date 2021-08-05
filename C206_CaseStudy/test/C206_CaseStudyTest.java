@@ -20,5 +20,20 @@ public class C206_CaseStudyTest {
 		assertTrue("C206_CaseStudy_SampleTest ",true);
 		
 	}
+	
+	@Test
+	public void managePackageAddTest() {
+		
+	}
+	
+	@Test
+	public void managePackageViewTest() {
+		
+	}
+	
+	@Test
+	public void managePackageDeleteTest() {
+		
+	}
 
 }
