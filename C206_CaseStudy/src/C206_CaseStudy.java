@@ -22,6 +22,7 @@ public class C206_CaseStudy {
 	ArrayList<RenoPackage> packageList = new ArrayList<RenoPackage>();
 //	ArrayList<Quote> quoteList = new ArrayList<Quote>();
 	ArrayList<Appointment> apptList = new ArrayList<Appointment>();
+	ArrayList<Quotation> QuotationList = new ArrayList<Quotation>();
 
 	public static void main(String[] args) {
 		C206_CaseStudy r = new C206_CaseStudy();
@@ -284,6 +285,32 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	private void manageQuotation() {
+		int choice = -1;
+
+		while (choice != 4) {
+				QuotationMenu();
+				choice = Validator.readIntPos("Enter choice > ");
+
+			switch (choice) {
+			case 1:
+				viewQuotation();
+				break;
+			case 2:
+				AddQuotation();
+				break;
+			case 3:
+				DeleteQuotation();
+				break;
+			case 4:
+				// Exit
+				break;
+			default:
+				System.out.println("Invalid Choice");
+				break;
+			}
+		}
+	}
 
 	private int getPackageCode() {
 		int code = 1;
@@ -409,4 +436,73 @@ public class C206_CaseStudy {
 		System.out.println(output);
 
 	}
+	
+	// ================================= Manage Quotation =====================================
+		private void QuotationMenu() {
+			System.out.println("1. View all Quotation");
+			System.out.println("2. Add Quotation");
+			System.out.println("3. Delete Quotation");
+			System.out.println("4. Quit");
+		}	
+		
+		private void AddQuotation() {
+			int RequestId = Helper.readInt("Enter Request ID > ");
+			int quotationId = Helper.readInt("Enter Quotation ID > ");
+			String RenoCategory = Helper.readString("Enter Designer Name > ");
+			String items = Helper.readString("Enter Items > ");
+			String DesignerName = Helper.readString("Enter Designer name > ");
+			String StartDate = Helper.readString("Enter Date of Appointment (dd/mm/yyyy) > ");
+			int totalAmount = Helper.readInt("Enter total amount > $");
+			
+			//change to string
+			String RID = Integer.toString(RequestId);
+			String QID = Integer.toString(quotationId);
+			String AMT = Integer.toString(totalAmount);
+
+			if (RID.isEmpty() || QID.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || DesignerName.isEmpty() || StartDate.isEmpty() || AMT.isEmpty()) {
+				System.out.println("Unable to add Quotation!");
+			} else {
+				QuotationList.add(new Quotation(RequestId, quotationId, RenoCategory, items, DesignerName,StartDate,totalAmount));
+				System.out.println("Quotation successfully added!");
+			}
+
+			
+
+		}
+		
+		
+		private void DeleteQuotation() {
+			int QuotationID = Helper.readInt("Enter Quotation ID > ");
+			String output = "";
+
+			for (int i = 0; i < QuotationList.size(); i++) {
+				if (QuotationList.get(i).getRequestId() == QuotationID) {
+					String ans = Helper.readString("Do you want to delete this appointment? (Y/N) > ");
+					if (ans.equalsIgnoreCase("y")) {
+						QuotationList.remove(i);
+						output = "Quotation successfully deleted!";
+					}
+					break;
+				} else {
+					output = "No such ID can be found!";
+				}
+			}
+			System.out.println(output);
+		}
+		
+		private void viewQuotation() {
+			Helper.line(80, "-");
+			System.out.println("VIEW Quotation");
+			Helper.line(80, "-");
+			String output = String.format("%-10s %-25s %-25s %-15s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID", "CATEGORY", "ITEMS",
+					"DESIGNER NAME ","START DATE", "TOTAL AMOUNT");
+			for (int i = 0; i < QuotationList.size(); i++) {
+				output += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+						QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(), QuotationList.get(i).getItems(),
+						QuotationList.get(i).getDesignerName(), QuotationList.get(i).getStartDate(),QuotationList.get(i).getTotalAmount());
+			}
+			System.out.println(output);
+		}
+		
+	
 }
