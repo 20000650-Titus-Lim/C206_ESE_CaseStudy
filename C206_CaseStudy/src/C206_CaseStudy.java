@@ -158,7 +158,7 @@ public class C206_CaseStudy {
 				break;
 			case 2:
 				// TODO: View All Packages
-
+				managePackageView();
 				break;
 			case 3:
 				// TODO: Delete Package
@@ -174,32 +174,44 @@ public class C206_CaseStudy {
 		}
 	}
 
+	private void managePackageView() {
+		Menu.printTitle("View All Packages");
+		
+		String output = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date", "Amount");
+		
+		for(RenoPackage p : packageList) {
+			output += String.format("%-5d %-30s %-12s %-12s $%.2f\n", p.getCode(), p.getDesc(), p.getStartDate(), p.getEndDate(), p.getAmount());
+		}
+		
+		System.out.println(output);
+	}
+
 	private void managePackageAdd() {
 		Menu.printTitle("Add Package");
 		int code = getPackageCode();
 		String desc = Validator.readString("Enter Description > ");
 		String start = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
 		String end = Validator.readString("Enter End Date (YYYY-MM-DD) > ");
-		double value = Validator.readDoublePos("Enter Value (Price) of Package > ");
+		double value = Validator.readDoublePos("Enter Amount (Price) of Package > ");
 
 		String regexDate = "(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
 
 		dateCheck dc = (String date) -> date.matches(regexDate);
 		
-		LocalDate dateStart = dateChecker(dc, start);
-		LocalDate dateEnd = dateChecker(dc, end);
+		LocalDate dateStart = dateChecker(dc, start, "Start");
+		LocalDate dateEnd = dateChecker(dc, end, "End");
 		
 		packageList.add(new RenoPackage(code, desc, dateStart, dateEnd, value));
 	}
 	
-	private LocalDate dateChecker(dateCheck condition, String date) {
+	private LocalDate dateChecker(dateCheck condition, String date, String type) {
 		String newDate = "";
 		LocalDate localDate = null;
 		boolean newDateVal = false;
 		
 		while (!condition.checker(date)) {
 			System.out.println("Invalid date format, please try again");
-			newDate = Validator.readString("Enter Start Date (YYYY-MM-DD) > ");
+			newDate = Validator.readString("Enter " + type + " Date (YYYY-MM-DD) > ");
 			
 			if(condition.checker(newDate)) {
 				localDate = LocalDate.parse(newDate);
