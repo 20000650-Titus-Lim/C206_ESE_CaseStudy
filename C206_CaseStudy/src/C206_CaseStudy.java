@@ -16,7 +16,7 @@ public class C206_CaseStudy {
 	private Menu menAdmin = new Menu();
 	private Menu menAdminAccount = new Menu();
 	private Menu menAdminPackage = new Menu();
-
+	
 	// ArrayLists for various things
 	// TODO: Add objects into ArrayLists in genArrList()
 	ArrayList<Account> accountList = new ArrayList<Account>();
@@ -24,7 +24,14 @@ public class C206_CaseStudy {
 //	ArrayList<Quote> quoteList = new ArrayList<Quote>();
 	ArrayList<Appointment> apptList = new ArrayList<Appointment>();
 	ArrayList<Quotation> QuotationList = new ArrayList<Quotation>();
-
+	
+	Account Acc6 = new Account("Vedha", "Admin", "Vedha@gmail.com", "Class");
+	Account Acc2 = new Account("Titus", "Admin", "Titus@gmail.com", "Class");
+	Account Acc3 = new Account("Qis", "Admin", "Qis@gmail.com", "Class");
+	Account Acc4 = new Account("Nic", "Admin", "Nic@gmail.com", "Class");
+	
+	
+	
 	public static void main(String[] args) {
 		C206_CaseStudy r = new C206_CaseStudy();
 		r.run();
@@ -44,6 +51,12 @@ public class C206_CaseStudy {
 		genMenuAdminUser();
 		genMenuAdminPackage(); // Manage Packages
 
+		
+		accountList.add(Acc6);
+		accountList.add(Acc2);
+		accountList.add(Acc3);
+		accountList.add(Acc4);
+		
 		int choice = -1;
 
 		while (choice != 4) {
@@ -51,15 +64,30 @@ public class C206_CaseStudy {
 			choice = Validator.readIntPos("Enter choice > ");
 
 			switch (choice) {
-			case 1:
+			case 1:		
 				// TODO: Login for Users; NOTE ONLY USE runUser() when logged in successfully in
 				// another method; its just here temporarily
-				runUser();
+				viewUser();
+				String Inputname = Helper.readString("Enter Username: ");
+				String Inputpass = Helper.readString("Enter Password: ");
+				for(Account A : accountList) {
+					if (A.getPassword().equalsIgnoreCase(Inputpass) && A.getName().equalsIgnoreCase(Inputname)) {
+						runUser();
+					}
+				}
 				break;
 			case 2:
 				// TODO: Login for Admins; NOTE ONLY USE runAdmin() when logged in successfully
 				// in another method; its just here temporarily
-				runAdmin();
+				
+				
+				String InputAdminname = Helper.readString("Enter Username: ");
+				String InputAdminpass = Helper.readString("Enter Password: ");
+				for(Account A : accountList) {
+					if (A.getPassword().equalsIgnoreCase(InputAdminpass) && A.getName().equalsIgnoreCase(InputAdminname)) {
+						runAdmin();
+					}
+				}
 				break;
 			case 3:
 				// TODO: Register new users
@@ -143,7 +171,15 @@ public class C206_CaseStudy {
 	}
 
 	private void regUser() {
+		String name = Helper.readString("Enter name: ");
+		String role = Helper.readString("Enter role: ");
+		String email = Helper.readString("Enter email: ");
+		String password = Helper.readString("Enter password: ");
 
+		Account Act1 = new Account(name, role, email, password);
+		accountList.add(Act1);
+
+		System.out.println(name + " Account Added!");
 	}
 
 	private void manageAccount() {
@@ -155,7 +191,7 @@ public class C206_CaseStudy {
 			switch (choice) {
 			case 1:
 				// TODO: Add Account
-				addAccount();
+				regUser();
 				break;
 			case 2:
 				// TODO: View All User
@@ -178,18 +214,6 @@ public class C206_CaseStudy {
 
 	// Code for getting account deatils from admin and Adding into the array list -
 	// Vedha
-	public void addAccount() {
-		String name = Helper.readString("Enter name: ");
-		String role = Helper.readString("Enter role: ");
-		String email = Helper.readString("Enter email: ");
-		String password = Helper.readString("Enter password: ");
-
-		Account Act1 = new Account(name, role, email, password);
-		accountList.add(Act1);
-
-		System.out.println(name + " Account Added!");
-
-	}
 
 	// code for view user - Vedha
 	public void viewUser() {
