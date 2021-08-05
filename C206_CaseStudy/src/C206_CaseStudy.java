@@ -162,7 +162,7 @@ public class C206_CaseStudy {
 				break;
 			case 3:
 				// TODO: Delete Package
-
+				managePackageDelete();				
 				break;
 			case 4:
 				// Exit
@@ -170,6 +170,36 @@ public class C206_CaseStudy {
 			default:
 				System.out.println("Invalid Choice");
 				break;
+			}
+		}
+	}
+
+	private void managePackageDelete() {
+		Menu.printTitle("Delete Package");
+		
+		String output = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date", "Amount");
+		int input = Validator.readIntPos("Enter package code > ");
+		int deleteCode = -1;
+		
+		for(RenoPackage p : packageList) {
+			if(input == p.getCode()) {
+				output += String.format("%-5d %-30s %-12s %-12s $%.2f\n", p.getCode(), p.getDesc(), p.getStartDate(), p.getEndDate(), p.getAmount());
+				deleteCode = packageList.indexOf(p);
+			}
+		}
+		
+		System.out.println(output);
+		
+		char confirm = Validator.readChar("Confirm Deletion of Package with Code - " + (deleteCode + 1) + " (y/n) > ");
+		
+		if(!(confirm == 'y' || confirm == 'n')) {
+			System.out.println("Invalid choice");
+		} else {
+			if(confirm == 'y') {
+				packageList.remove(deleteCode);
+				System.out.println("Package Deleted.");
+			} else if (confirm == 'n') {
+				System.out.println("Operation Cancelled.");
 			}
 		}
 	}
