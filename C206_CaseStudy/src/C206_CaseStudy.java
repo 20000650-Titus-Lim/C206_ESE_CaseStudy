@@ -350,13 +350,16 @@ public class C206_CaseStudy {
 
 			switch (choice) {
 			case 1:
-				viewAllAppointment();
+				C206_CaseStudy.viewAllAppointment(apptList);
 				break;
 			case 2:
-				addAppointment();
+				Appointment appt = inputAppointment();
+				C206_CaseStudy.addAppointment(apptList, appt);
 				break;
 			case 3:
-				deleteAppointment();
+				C206_CaseStudy.viewAllAppointment(apptList);
+				int apptID = Helper.readInt("Enter Appointment ID to delete > ");
+				C206_CaseStudy.deleteAppointment(apptList, apptID);
 				break;
 			case 4:
 				// Exit
@@ -462,7 +465,7 @@ public class C206_CaseStudy {
 	}
 
 	// ================================= Manage Appointment
-	// =====================================
+	// ===================================== (Qisthina)
 	private void apptMenu() {
 		System.out.println("1. View Appointment");
 		System.out.println("2. Add Appointment");
@@ -471,7 +474,7 @@ public class C206_CaseStudy {
 	}
 
 	// Option 1 Adding the Appointment
-	private void addAppointment() {
+	public static Appointment inputAppointment() {
 		int id = Helper.readInt("Enter Appointment ID > ");
 		String name = Helper.readString("Enter Name > ");
 		String s = Integer.toString(id);
@@ -490,32 +493,40 @@ public class C206_CaseStudy {
 
 		if (isValid == false) {
 			System.out.println("Unable to add appointment!");
-		} else {
-			apptList.add(new Appointment(id, name, dName, date, time, address));
-			System.out.println("Appointment successfully added!");
 		}
+		Appointment appt = new Appointment(id, name, dName, date, time, address);
+		return appt;
 
 	}
 
+	public static void addAppointment(ArrayList<Appointment> apptList, Appointment appt) {
+		apptList.add(appt);
+		System.out.println("Appointment successfully added!");
+	}
+
 	// Option 2 Viewing all the Appointment
-	private void viewAllAppointment() {
-		Helper.line(150, "-");
-		System.out.println("VIEW APPOINTMENT");
-		Helper.line(150, "-");
-		String output = String.format("%-10s %-25s %-25s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
-				"TIME", "ADDRESS");
+	public static String retrieveAllAppointment(ArrayList<Appointment> apptList) {
+		String output = "";
 		for (int i = 0; i < apptList.size(); i++) {
-			output += String.format("%-10s %-25s %-25s %-15s %-15s %-30s\n", apptList.get(i).getAppId(),
+			output += String.format("%-10s %-20s %-20s %-15s %-15s %-30s\n", apptList.get(i).getAppId(),
 					apptList.get(i).getCustName(), apptList.get(i).getdName(), apptList.get(i).getDateofApp(),
 					apptList.get(i).getTimeofApp(), apptList.get(i).getAddress());
 		}
+		return output;
+	}
+
+	public static void viewAllAppointment(ArrayList<Appointment> apptList) {
+		Helper.line(150, "-");
+		System.out.println("VIEW APPOINTMENT");
+		Helper.line(150, "-");
+		String output = String.format("%-10s %-20s %-20s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
+				"TIME", "ADDRESS");
+		output += retrieveAllAppointment(apptList);
 		System.out.println(output);
 	}
 
 	// Option 3 Deleting of the Appointment
-	private void deleteAppointment() {
-		viewAllAppointment();
-		int apptID = Helper.readInt("Enter Appointment ID > ");
+	public static void deleteAppointment(ArrayList<Appointment> apptList, int apptID) {
 		String output = "";
 
 		for (int i = 0; i < apptList.size(); i++) {
