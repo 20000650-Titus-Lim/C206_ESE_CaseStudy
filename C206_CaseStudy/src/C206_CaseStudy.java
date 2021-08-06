@@ -62,7 +62,7 @@ public class C206_CaseStudy {
 		while (choice != 4) {
 			menLogin.printMenu("LOGIN");
 			choice = Validator.readIntPos("Enter choice > ");
-
+			String output = "";
 			switch (choice) {
 			case 1:		
 				// TODO: Login for Users; NOTE ONLY USE runUser() when logged in successfully in
@@ -70,23 +70,29 @@ public class C206_CaseStudy {
 				String Inputname = Helper.readString("Enter Username: ");
 				String Inputpass = Helper.readString("Enter Password: ");
 				for(Account A : accountList) {
-					if (A.getPassword().equalsIgnoreCase(Inputpass) && A.getName().equalsIgnoreCase(Inputname)) {
+					if (A.getPassword().equals(Inputpass) && A.getName().equals(Inputname)) {
 						runUser();
 					}
+					else {
+						output = "Invalid Username or Password";
+					}
 				}
+				System.out.println(output);
 				break;
 			case 2:
 				// TODO: Login for Admins; NOTE ONLY USE runAdmin() when logged in successfully
 				// in another method; its just here temporarily
-				
-				
 				String InputAdminname = Helper.readString("Enter Username: ");
 				String InputAdminpass = Helper.readString("Enter Password: ");
 				for(Account A : accountList) {
-					if (A.getPassword().equalsIgnoreCase(InputAdminpass) && A.getName().equalsIgnoreCase(InputAdminname)) {
+					if (A.getPassword().equals(InputAdminpass) && A.getName().equals(InputAdminname)) {
 						runAdmin();
 					}
+					else {
+						output = "Invalid Username or Password";
+					}
 				}
+				System.out.println(output);
 				break;
 			case 3:
 				// TODO: Register new users
