@@ -442,7 +442,7 @@ public class C206_CaseStudy {
 
 				break;
 			case 3:
-				DeleteQuotation();
+				ManageDeleteQuotation();
 				break;
 			case 4:
 				// Exit
@@ -641,7 +641,7 @@ public class C206_CaseStudy {
 		System.out.println("Quotation successfully added!");
 	}
 
-	private void DeleteQuotation() {
+	private void ManageDeleteQuotation() {
 		Helper.line(80, "-");
 		System.out.println("Delete Quotation");
 		Helper.line(80, "-");

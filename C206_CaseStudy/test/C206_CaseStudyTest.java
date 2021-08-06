@@ -153,11 +153,12 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addQuotation(QuotationList, Q1);
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
 		assertSame("Check that first Quotation is added", Q1, apptList.get(0));
-		C206_CaseStudy.DeleteQuotation(QuotationList, 1);
+		C206_CaseStudy.DeleteQuotation(1,QuotationList);
+		
 		assertEquals("Test that Quotation arraylist size is 1 after delete", 1, QuotationList.size());
 
 		// Test if the size of the list is 0 after removing 1 Quotation
-		C206_CaseStudy.DeleteQuotation(QuotationList, 2);
+		C206_CaseStudy.DeleteQuotation(2,QuotationList);
 		assertEquals("Test that Quotation arraylist size is 0", 0, apptList.size());
 
 	}
