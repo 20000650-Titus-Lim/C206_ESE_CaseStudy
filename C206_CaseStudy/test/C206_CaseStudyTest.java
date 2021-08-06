@@ -236,6 +236,7 @@ public class C206_CaseStudyTest {
 		
 		//Test deleteing in an empty list the list size stays 0
 		C206_CaseStudy.DeleteQuotation(1,QuotationList);
+		
 		assertEquals("Test that Quotation arraylist size is still 0 even though there is nothing in the list", 0, apptList.size());
 
 	}
