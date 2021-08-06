@@ -530,7 +530,7 @@ public class C206_CaseStudy {
 
 	// Option 2 Viewing all the Appointment
 	public static String retrieveAllAppointment(ArrayList<Appointment> apptList) {
-		String output = "";
+		String output = ""; 
 		for (int i = 0; i < apptList.size(); i++) {
 			output += String.format("%-10d %-20s %-20s %-15s %-15s %-30s\n", apptList.get(i).getAppId(),
 					apptList.get(i).getCustName(), apptList.get(i).getdName(), apptList.get(i).getDateofApp(),
