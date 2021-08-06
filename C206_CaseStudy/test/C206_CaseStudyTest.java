@@ -156,7 +156,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.DeleteQuotation(QuotationList, 1);
 		assertEquals("Test that Quotation arraylist size is 1 after delete", 1, QuotationList.size());
 
-		// Test if the size of the list is 0 after removing 1 more appointment
+		// Test if the size of the list is 0 after removing 1 Quotation
 		C206_CaseStudy.DeleteQuotation(QuotationList, 2);
 		assertEquals("Test that Quotation arraylist size is 0", 0, apptList.size());
 
