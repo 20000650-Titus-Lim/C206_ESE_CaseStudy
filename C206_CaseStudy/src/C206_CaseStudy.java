@@ -413,7 +413,8 @@ public class C206_CaseStudy {
 
 			switch (choice) {
 			case 1:
-				viewQuotation();
+				
+				C206_CaseStudy.viewQuotation(QuotationList);
 				break;
 			case 2:
 				Quotation Q = InputQuotation();
@@ -421,7 +422,8 @@ public class C206_CaseStudy {
 
 				break;
 			case 3:
-				DeleteQuotation();
+				int QuotationID = Helper.readInt("Enter Quotation ID > ");
+				C206_CaseStudy.DeleteQuotation(QuotationList, QuotationID);
 				break;
 			case 4:
 				// Exit
@@ -621,12 +623,12 @@ public class C206_CaseStudy {
 		System.out.println("Quotation successfully added!");
 	}
 
-	private void DeleteQuotation() {
-		int QuotationID = Helper.readInt("Enter Quotation ID > ");
+	private static void DeleteQuotation(ArrayList<Quotation> QuotationList, int quotationID) {
+		
 		String output = "";
 
 		for (int i = 0; i < QuotationList.size(); i++) {
-			if (QuotationList.get(i).getRequestId() == QuotationID) {
+			if (QuotationList.get(i).getRequestId() == quotationID) {
 				String ans = Helper.readString("Do you want to delete this appointment? (Y/N) > ");
 				if (ans.equalsIgnoreCase("y")) {
 					QuotationList.remove(i);
@@ -640,19 +642,25 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private void viewQuotation() {
-		Helper.line(80, "-");
-		System.out.println("VIEW Quotation");
-		Helper.line(80, "-");
-		String output = String.format("%-10s %-25s %-25s %-15s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID",
-				"CATEGORY", "ITEMS", "DESIGNER NAME ", "START DATE", "TOTAL AMOUNT");
+
+	public static String retrieveQuotation(ArrayList<Quotation> QuotationList) {
+		String output = ""; 
 		for (int i = 0; i < QuotationList.size(); i++) {
 			output += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
 					QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
 					QuotationList.get(i).getItems(), QuotationList.get(i).getDesignerName(),
 					QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
 		}
-		System.out.println(output);
+		return output;
 	}
 
+	public static void viewQuotation(ArrayList<Quotation> QuotationList) {
+		Helper.line(80, "-");
+		System.out.println("VIEW Quotation");
+		Helper.line(80, "-");
+		String output = String.format("%-10s %-25s %-25s %-15s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID",
+				"CATEGORY", "ITEMS", "DESIGNER NAME ", "START DATE", "TOTAL AMOUNT");
+		output += retrieveQuotation(QuotationList);
+		System.out.println(output);
+	}
 }
