@@ -21,7 +21,6 @@ public class C206_CaseStudy {
 	// TODO: Add objects into ArrayLists in genArrList()
 	ArrayList<Account> accountList = new ArrayList<Account>();
 	ArrayList<RenoPackage> packageList = new ArrayList<RenoPackage>();
-//		ArrayList<Quote> quoteList = new ArrayList<Quote>();
 	ArrayList<Appointment> apptList = new ArrayList<Appointment>();
 	ArrayList<Quotation> QuotationList = new ArrayList<Quotation>();
 
@@ -634,12 +633,14 @@ public class C206_CaseStudy {
 
 	public static Quotation InputQuotation() {
 		Quotation Q = null;
+		String datePattern = "((0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-[12]\\d{3})";
+		
 		int RequestId = Helper.readInt("Enter Request ID > ");
 		int quotationId = Helper.readInt("Enter Quotation ID > ");
 		String RenoCategory = Helper.readString("Enter Category> ");
 		String items = Helper.readString("Enter Items > ");
 		String DesignerName = Helper.readString("Enter Designer name > ");
-		String StartDate = Helper.readString("Enter Date of Appointment (dd/mm/yyyy) > ");
+		String StartDate = Helper.readStringRegEx("Enter Date of Appointment (dd-mm-yyyy) > ", datePattern);
 		int totalAmount = Helper.readInt("Enter total amount > $");
 
 		// change to string
