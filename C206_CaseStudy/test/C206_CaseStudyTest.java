@@ -293,11 +293,11 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addAppointment(apptList, appt1);
 		C206_CaseStudy.addAppointment(apptList, appt2);
 		assertSame("Check that first appointment is added", appt1, apptList.get(0));
-		C206_CaseStudy.deleteAppointment(apptList, 1);
+		C206_CaseStudy.deleteAppointment(1, apptList);
 		assertEquals("Test that Appointment arraylist size is 1", 1, apptList.size());
 
 		// Test if the size of the list is 0 after removing 1 more appointment
-		C206_CaseStudy.deleteAppointment(apptList, 2);
+		C206_CaseStudy.deleteAppointment(2, apptList);
 		assertEquals("Test that Appointment arraylist size is 0", 0, apptList.size());
 
 	}

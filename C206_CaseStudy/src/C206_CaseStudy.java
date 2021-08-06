@@ -24,8 +24,6 @@ public class C206_CaseStudy {
 //		ArrayList<Quote> quoteList = new ArrayList<Quote>();
 	ArrayList<Appointment> apptList = new ArrayList<Appointment>();
 	ArrayList<Quotation> QuotationList = new ArrayList<Quotation>();
-	
-	
 
 	Account Acc1 = new Account("Vedha", "Admin", "Vedha@gmail.com", "Class", "Confirmed");
 	Account Acc2 = new Account("Titus", "Admin", "Titus@gmail.com", "Class", "Confirmed");
@@ -78,7 +76,8 @@ public class C206_CaseStudy {
 				String Inputname = Helper.readString("Enter Username: ");
 				String Inputpass = Helper.readString("Enter Password: ");
 				for (Account A : accountList) {
-					if (A.getPassword().equals(Inputpass) && A.getName().equals(Inputname) && A.getRole().equals("User")) {
+					if (A.getPassword().equals(Inputpass) && A.getName().equals(Inputname)
+							&& A.getRole().equals("User")) {
 						runUser();
 					} else {
 						output = "Invalid Username or Password";
@@ -92,7 +91,8 @@ public class C206_CaseStudy {
 				String InputAdminname = Helper.readString("Enter Username: ");
 				String InputAdminpass = Helper.readString("Enter Password: ");
 				for (Account A : accountList) {
-					if (A.getPassword().equals(InputAdminpass) && A.getName().equals(InputAdminname) && A.getRole().equals("Admin")) {
+					if (A.getPassword().equals(InputAdminpass) && A.getName().equals(InputAdminname)
+							&& A.getRole().equals("Admin")) {
 						runAdmin();
 					} else {
 						output = "Invalid Username or Password";
@@ -187,20 +187,19 @@ public class C206_CaseStudy {
 		String email = Helper.readString("Enter email: ");
 		String password = Helper.readString("Enter password: ");
 		String status = "New";
-		if(!name.isEmpty() && !role.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-			if(role.equalsIgnoreCase("User") || role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("Designer")) {
+		if (!name.isEmpty() && !role.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+			if (role.equalsIgnoreCase("User") || role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("Designer")) {
 				Account Act1 = new Account(name, role, email, password, status);
 				regUser(accountList, Act1);
-			}
-			else {
+			} else {
 				System.out.println("Wrong role!");
 			}
-		}else {
+		} else {
 			System.out.println("Invliad Input!");
 		}
 
 	}
-	
+
 	public static void regUser(ArrayList<Account> accountList, Account Act1) {
 		accountList.add(Act1);
 		System.out.println("Account Added!");
@@ -264,20 +263,17 @@ public class C206_CaseStudy {
 					code = accountList.indexOf(A);
 					deleteAccount(code, accountList);
 					output = Inputname + " Account has been deleted!";
-				}
-				else if(decision == 'N' || decision == 'n'){
+				} else if (decision == 'N' || decision == 'n') {
 					output += "Deletion Cancled!";
-			}
+				}
 				break;
-			}
-			else {
+			} else {
 				output = Inputname + " Account invalid!";
 			}
 		}
 		System.out.println(output);
 	}
-	
-	
+
 	public static boolean deleteAccount(int code, ArrayList<Account> accountList) {
 		accountList.remove(code);
 		return true;
@@ -432,8 +428,7 @@ public class C206_CaseStudy {
 				break;
 			case 3:
 				C206_CaseStudy.viewAllAppointment(apptList);
-				int apptID = Helper.readInt("Enter Appointment ID to delete > ");
-				C206_CaseStudy.deleteAppointment(apptList, apptID);
+				manageDeleteAppointment();
 				break;
 			case 4:
 				// Exit
@@ -550,26 +545,23 @@ public class C206_CaseStudy {
 
 	// Option 1 Adding the Appointment
 	public static Appointment inputAppointment() {
+		Appointment appt = null;
+		String pattern = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
+		String pattern2 = "\\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))";
 		int id = Helper.readInt("Enter Appointment ID > ");
 		String name = Helper.readString("Enter Name > ");
 		String s = Integer.toString(id);
 		String dName = Helper.readString("Enter Designer Name > ");
-		String date = Helper.readString("Enter Date of Appointment (dd/mm/yyyy) > ");
-		String time = Helper.readString("Enter Time of Appointment (hh:mm am/pm) >");
+		String date = Helper.readStringRegEx("Enter Date of Appointment (dd/mm/yyyy) > ", pattern);
+		String time = Helper.readStringRegEx("Enter Time of Appointment (hh:mm am/pm) >", pattern2);
 		String address = Helper.readString("Enter Address > ");
 
-		boolean isValid = false;
-
-		if (dName.isEmpty() || date.isEmpty() || time.isEmpty() || address.isEmpty() || s.isEmpty() || name.isEmpty()) {
-			isValid = false;
-		} else {
-			isValid = true;
-		}
-
-		if (isValid == false) {
+		if (dName.isEmpty() || address.isEmpty() || s.isEmpty() || name.isEmpty()) {
 			System.out.println("Unable to add appointment!");
+			appt = null;
+		} else {
+			appt = new Appointment(id, name, dName, date, time, address);
 		}
-		Appointment appt = new Appointment(id, name, dName, date, time, address);
 		return appt;
 
 	}
@@ -601,24 +593,34 @@ public class C206_CaseStudy {
 	}
 
 	// Option 3 Deleting of the Appointment
-	public static void deleteAppointment(ArrayList<Appointment> apptList, int x) {
+	private void manageDeleteAppointment() {
 		String output = "";
+		int apptID = Helper.readInt("Enter Appointment ID to delete > ");
+		int deletion = -1;
 
-		for (int i = 0; i < apptList.size(); i++) {
-			if (apptList.get(i).getAppId() == x) {
+		for (Appointment a : apptList) {
+			if (apptID == a.getAppId()) {
+				deletion = apptList.indexOf(a);
 				char decision = Helper.readChar("Do you want to delete this appointment? (Y/N) > ");
 				if (decision == 'y' || decision == 'Y') {
-					apptList.remove(i);
+					deletion = apptList.indexOf(a);
+					deleteAppointment(deletion, apptList);
 					output = "Appointment successfully deleted!";
-				} else {
+				} else if (decision == 'n' || decision == 'N') {
 					output = "Appointment not deleted!";
 				}
+				break;
+
 			} else {
 				output = "No such ID found!";
 			}
 		}
 		System.out.println(output);
 
+	}
+
+	public static void deleteAppointment(int deletion, ArrayList<Appointment> apptList) {
+		apptList.remove(deletion);
 	}
 
 	// ================================= Manage Quotation
@@ -671,7 +673,7 @@ public class C206_CaseStudy {
 		String output = "";
 
 		for (Quotation Q : QuotationList) {
-			
+
 			if (input == Q.getRequestId()) {
 				deleteCode = QuotationList.indexOf(Q);
 				String ans = Helper.readString("Do you want to delete this appointment? (Y/N) > ");
@@ -686,13 +688,10 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
-	
-	
-	public static void DeleteQuotation(int deleteCode,ArrayList<Quotation> QuotationList) {
+
+	public static void DeleteQuotation(int deleteCode, ArrayList<Quotation> QuotationList) {
 		QuotationList.remove(deleteCode);
 	}
-
-	
 
 	public static String retrieveQuotation(ArrayList<Quotation> QuotationList) {
 		String output = "";
