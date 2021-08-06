@@ -17,24 +17,26 @@ public class C206_CaseStudyTest {
 	private Appointment appt1;
 	private Appointment appt2;
 	private ArrayList<Appointment> apptList = new ArrayList<Appointment>();
-	
+
 	private RenoPackage p1;
 	private RenoPackage p2;
 	private RenoPackage p3;
 	private ArrayList<RenoPackage> packageList = new ArrayList<RenoPackage>();
-	
+
 	@Before
 	public void setUp() throws Exception {
 
 		Q1 = new Quotation(1, 1, "Living Room", "Door", "Nicholas", "8/8/2021", 1500);
 		Q2 = new Quotation(2, 2, "Kitchen", "Door", "TOM", "10/8/2021", 2000);
-		
-		appt1 = new Appointment(1, "Qisthina", "Lucy", "27/09/2021", "12:30 pm", "Block 533 Choa Chu Kang Strt 12 #12-315");
+
+		appt1 = new Appointment(1, "Qisthina", "Lucy", "27/09/2021", "12:30 pm",
+				"Block 533 Choa Chu Kang Strt 12 #12-315");
 		appt2 = new Appointment(2, "Daniah", "Lucy", "30/09/2021", "4:00 pm", "Block 667 Yio Chu Kang Strt 4 #05-212");
-		
+
 		p1 = new RenoPackage(1, "Majulah Package", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 8, 31), 20000);
 		p2 = new RenoPackage(2, "New Year Package", LocalDate.of(2021, 12, 31), LocalDate.of(2022, 1, 12), 35000);
-		p3 = new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28),LocalDate.of(2021, 11, 16), 148000);
+		p3 = new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28), LocalDate.of(2021, 11, 16),
+				148000);
 	}
 
 	@Test
@@ -73,15 +75,17 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addPackage(packageList, p1);
 		assertEquals("Check that Package arraylist size is 1", 1, packageList.size());
 		assertSame("Check that first Package is added", p1, packageList.get(0));
-		
-		//Test if the expected output string same as the list of Appointments retrieved
-		//from the ArrayList
+
+		// Test if the expected output string same as the list of Appointments retrieved
+		// from the ArrayList
 		String viewPackages = C206_CaseStudy.managePackageView(packageList);
-		String viewPackagesTest = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date", "Amount");
-		viewPackagesTest += String.format("%-5d %-30s %-12s %-12s $%.2f\n", 1, "Majulah Package", "2021-08-01",	"2021-08-31", 20000.00);
-		
+		String viewPackagesTest = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date",
+				"End Date", "Amount");
+		viewPackagesTest += String.format("%-5d %-30s %-12s %-12s $%.2f\n", 1, "Majulah Package", "2021-08-01",
+				"2021-08-31", 20000.00);
+
 		assertEquals("Test that output of method is the same as expected output", viewPackages, viewPackagesTest);
-}
+	}
 
 	@Test
 	public void managePackageDeleteTest() {
@@ -94,7 +98,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addPackage(packageList, p1);
 		assertEquals("Check that Package arraylist size is 1", 1, packageList.size());
 		assertSame("Check that first Package is added", p1, packageList.get(0));
-		
+
 		// Test if the size of the list is 0 after removing 1 more appointment
 		C206_CaseStudy.deletePackage(0, packageList);
 		assertEquals("Test that the size of the list is 0 when the only package is removed.", packageList.size(), 0);
@@ -116,6 +120,29 @@ public class C206_CaseStudyTest {
 		// Add another item. test The size of the list is 2?
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
 		assertEquals("Test that Quotation arraylist size is 2?", 2, QuotationList.size());
+	}
+
+	@Test
+	public void testViewQuotation() {
+		// Item list is not null, so that can add a new item
+		assertNotNull("Test if there is valid Quotation arraylist to add to", QuotationList);
+
+		// Given an empty list, after adding 2 item, the size of the list is 2
+		C206_CaseStudy.addQuotation(QuotationList, Q1);
+		C206_CaseStudy.addQuotation(QuotationList, Q2);
+		assertEquals("Test if that Quotation arraylist size is 1?", 2, QuotationList.size());
+
+		// Test if the expected output string same as the quotation list retrieved
+		// from the ArrayList
+		String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList);
+
+		String QuotaionTest = String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 1, 1, "Living Room", "Door",
+				"Nicholas", "8/8/2021", 1500);
+		QuotaionTest += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 2, 2, "Kitchen", "Door", "TOM",
+				"10/8/2021", 2000);
+
+		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
+
 	}
 
 	@Test
@@ -183,7 +210,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Appointment arraylist size is 0", 0, apptList.size());
 
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 		Q1 = null;
