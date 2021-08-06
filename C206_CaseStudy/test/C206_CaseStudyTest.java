@@ -34,8 +34,8 @@ public class C206_CaseStudyTest {
 		Acc1 = new Account("Vedha", "Admin", "Vedha@gmail.com", "Class", "Confirmed");
 		Acc2 = new Account("Vedha1", "User", "Vedha1@gmail.com", "Class1", "Confirmed");
 
-		Q1 = new Quotation(1, 1, "Living Room", "Door", "Nicholas", "8/8/2021", 1500);
-		Q2 = new Quotation(2, 2, "Kitchen", "Door", "TOM", "10/8/2021", 2000);
+		Q1 = new Quotation(1, 1, "Living Room", "Door", "Nicholas", "8-8-2021", 1500);
+		Q2 = new Quotation(2, 2, "Kitchen", "Door", "TOM", "10-8-2021", 2000);
 
 		appt1 = new Appointment(1, "Qisthina", "Lucy", "27/09/2021", "12:30 pm",
 				"Block 533 Choa Chu Kang Strt 12 #12-315");
@@ -52,6 +52,7 @@ public class C206_CaseStudyTest {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
+
 	@Test
 	public void manageAccountAddTest() {
 		// Account list is not null, so that can add a new user - boundary
@@ -95,8 +96,10 @@ public class C206_CaseStudyTest {
 		// Test if the expected output string same as the list of Appointments retrieved
 		// from the ArrayList
 		String viewAccount = C206_CaseStudy.viewUser(accountList);
-		String viewAccountTest = String.format("%-15s %-11s %-20s %-20s %-10s\n", "Account Name", "Role", "Email", "Password", "Status");
-		viewAccountTest += String.format("%-15s %-11s %-20s %-20s %-10s\n", "Vedha", "Admin", "Vedha@gmail.com", "Class", "Confirmed");
+		String viewAccountTest = String.format("%-15s %-11s %-20s %-20s %-10s\n", "Account Name", "Role", "Email",
+				"Password", "Status");
+		viewAccountTest += String.format("%-15s %-11s %-20s %-20s %-10s\n", "Vedha", "Admin", "Vedha@gmail.com",
+				"Class", "Confirmed");
 
 		assertEquals("Test that output of method is the same as expected output", viewAccount, viewAccountTest);
 	}
@@ -208,14 +211,15 @@ public class C206_CaseStudyTest {
 		String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList);
 
 		String QuotaionTest = String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 1, 1, "Living Room", "Door",
-				"Nicholas", "8/8/2021", 1500);
+				"Nicholas", "8-8-2021", 1500);
 		QuotaionTest += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 2, 2, "Kitchen", "Door", "TOM",
-				"10/8/2021", 2000);
+				"10-8-2021", 2000);
 
 		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
 
 	}
-	
+
+	@Test
 	public void testQuotationDelete() {
 		// Test if Quotation list is not null but empty
 		assertNotNull("Test if there is valid Quotation arraylist to retrieve Quotation", QuotationList);
@@ -226,30 +230,20 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addQuotation(QuotationList, Q1);
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
 		assertSame("Check that first Quotation is added", Q1, QuotationList.get(0));
-		C206_CaseStudy.DeleteQuotation(1,QuotationList);
-		
+		C206_CaseStudy.DeleteQuotation(1, QuotationList);
+
 		assertEquals("Test that Quotation arraylist size is 1 after delete", 1, QuotationList.size());
+
 		
 		// Test that the correct variable is deleted.
 				String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList);
 
-				String QuotaionTest = String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 2, 2, "Kitchen", "Door", "TOM",
-						"10/8/2021", 2000);
 
+				String QuotaionTest = String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 1, 1, "Living Room", "Door",
+						"Nicholas", "8-8-2021", 1500);
+				
 				assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
 
-		
-
-		
-
-		// Test if the size of the list is 0 after removing 1 Quotation
-		C206_CaseStudy.DeleteQuotation(2,QuotationList);
-		assertEquals("Test that Quotation arraylist size is 0", 0, QuotationList.size());
-		
-		//Test deleteing in an empty list the list size stays 0
-		C206_CaseStudy.DeleteQuotation(1,QuotationList);
-		
-		assertEquals("Test that Quotation arraylist size is still 0 even though there is nothing in the list", 0, QuotationList.size());
 
 	}
 
@@ -300,6 +294,7 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllCamcorderlist", testOutput, allAppt);
 	}
+
 	@Test
 	public void deleteAppointmentTest() {
 		// Test if Appointment list is not null but empty -boundary
