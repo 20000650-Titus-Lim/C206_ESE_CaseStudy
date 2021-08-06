@@ -304,6 +304,9 @@ public class C206_CaseStudy {
 				output += String.format("%-5d %-30s %-12s %-12s $%.2f\n", p.getCode(), p.getDesc(), p.getStartDate(),
 						p.getEndDate(), p.getAmount());
 				deleteCode = packageList.indexOf(p);
+			} else {
+				System.out.println("No matching code found!");
+				return;
 			}
 		}
 
