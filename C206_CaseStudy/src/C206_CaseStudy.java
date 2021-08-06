@@ -24,6 +24,8 @@ public class C206_CaseStudy {
 //		ArrayList<Quote> quoteList = new ArrayList<Quote>();
 	ArrayList<Appointment> apptList = new ArrayList<Appointment>();
 	ArrayList<Quotation> QuotationList = new ArrayList<Quotation>();
+	
+	
 
 	Account Acc1 = new Account("Vedha", "Admin", "Vedha@gmail.com", "Class", "Confirmed");
 	Account Acc2 = new Account("Titus", "Admin", "Titus@gmail.com", "Class", "Confirmed");
@@ -461,8 +463,7 @@ public class C206_CaseStudy {
 
 				break;
 			case 3:
-				int QuotationID = Helper.readInt("Enter Quotation ID > ");
-				C206_CaseStudy.DeleteQuotation(QuotationList, QuotationID);
+				ManageDeleteQuotation();
 				break;
 			case 4:
 				// Exit
@@ -661,15 +662,21 @@ public class C206_CaseStudy {
 		System.out.println("Quotation successfully added!");
 	}
 
-	public static void DeleteQuotation(ArrayList<Quotation> QuotationList, int quotationID) {
-
+	private void ManageDeleteQuotation() {
+		Helper.line(80, "-");
+		System.out.println("Delete Quotation");
+		Helper.line(80, "-");
+		int input = Validator.readIntPos("Enter package code > ");
+		int deleteCode = -1;
 		String output = "";
 
-		for (int i = 0; i < QuotationList.size(); i++) {
-			if (QuotationList.get(i).getRequestId() == quotationID) {
+		for (Quotation Q : QuotationList) {
+			
+			if (input == Q.getRequestId()) {
+				deleteCode = QuotationList.indexOf(Q);
 				String ans = Helper.readString("Do you want to delete this appointment? (Y/N) > ");
 				if (ans.equalsIgnoreCase("y")) {
-					QuotationList.remove(i);
+					DeleteQuotation(deleteCode, QuotationList);
 					output = "Quotation successfully deleted!";
 				}
 				break;
@@ -679,6 +686,13 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
+	
+	
+	public static void DeleteQuotation(int deleteCode,ArrayList<Quotation> QuotationList) {
+		QuotationList.remove(deleteCode);
+	}
+
+	
 
 	public static String retrieveQuotation(ArrayList<Quotation> QuotationList) {
 		String output = "";
