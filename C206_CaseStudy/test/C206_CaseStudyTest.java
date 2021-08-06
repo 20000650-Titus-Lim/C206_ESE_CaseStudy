@@ -7,9 +7,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import renovationACE.Account;
 import renovationACE.RenoPackage;
 
 public class C206_CaseStudyTest {
+	private Account Acc1;
+	private Account Acc2;
+	ArrayList<Account> accountList = new ArrayList<Account>();
+
 	private Quotation Q1;
 	private Quotation Q2;
 	ArrayList<Quotation> QuotationList = new ArrayList<Quotation>();
@@ -25,6 +30,9 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
+
+		Acc1 = new Account("Vedha", "Admin", "Vedha@gmail.com", "Class", "Confirmed");
+		Acc2 = new Account("Vedha1", "User", "Vedha1@gmail.com", "Class1", "Confirmed");
 
 		Q1 = new Quotation(1, 1, "Living Room", "Door", "Nicholas", "8/8/2021", 1500);
 		Q2 = new Quotation(2, 2, "Kitchen", "Door", "TOM", "10/8/2021", 2000);
@@ -43,6 +51,69 @@ public class C206_CaseStudyTest {
 	public void c206_test() {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
+	}
+
+	public void manageAccountAddTest() {
+		// Account list is not null, so that can add a new user - boundary
+		assertNotNull("Check if there is valid Account arraylist to add to", accountList);
+
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+		// Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		// The Account just added is as same as the first Account of the list
+		C206_CaseStudy.regUser(accountList, Acc1);
+		assertEquals("Check that Account arraylist size is 1", 1, accountList.size());
+		assertSame("Check that Account is added", Acc1, accountList.get(0));
+
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+		// Add another item. test The size of the list is 2? -normal
+		// The item just added is as same as the second item of the list
+		C206_CaseStudy.regUser(accountList, Acc2);
+		assertEquals("Check that Account arraylist size is 2", 2, accountList.size());
+		assertSame("Check that Account is added", Acc2, accountList.get(1));
+
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+		// Add another item. test The size of the list is not bigger than 2? -Error
+		// The item just added is as same as the second item of the list
+		assertNotEquals("Check that Account arraylist size is not bigger than 2", 3, accountList.size());
+	}
+
+	@Test
+	public void manageAccountViewTest() {
+		// Test if Item list is not null but empty -boundary
+		assertNotNull("Test if there is valid Account arraylist to retrieve item", accountList);
+
+		// Given an empty list, after adding 1 appointment, the size of the list is 1 -
+		// normal
+		// The Package just added is as same as the first item of the list
+		C206_CaseStudy.regUser(accountList, Acc1);
+		assertEquals("Check that Account arraylist size is 1", 1, accountList.size());
+		assertSame("Check that first Package is added", Acc1, accountList.get(0));
+
+		// Test if the expected output string same as the list of Appointments retrieved
+		// from the ArrayList
+		String viewAccount = C206_CaseStudy.viewUser(accountList);
+		String viewAccountTest = String.format("%-15s %-11s %-20s %-20s %-10s\n", "Account Name", "Role", "Email", "Password", "Status");
+		viewAccountTest += String.format("%-15s %-11s %-20s %-20s %-10s\n", "Vedha", "Admin", "Vedha@gmail.com", "Class", "Confirmed");
+
+		assertEquals("Test that output of method is the same as expected output", viewAccount, viewAccountTest);
+	}
+
+	@Test
+	public void manageAccountDeleteTest() {
+		// Account list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid Account arraylist to add to", accountList);
+
+		//
+		C206_CaseStudy.regUser(accountList, Acc1);
+		assertEquals("Check that Package arraylist size is 1", 1, accountList.size());
+		assertSame("Check that first Package is added", Acc1, accountList.get(0));
+
+		// Test if the size of the list is 0 after removing 1 more appointment
+		C206_CaseStudy.deleteAccount(0, accountList);
+		assertEquals("Test that the size of the list is 0 when the only package is removed.", accountList.size(), 0);
 	}
 
 	@Test
@@ -144,11 +215,13 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
 
 	}
+
 	public void testQuotationDelete() {
 		// Test if Quotation list is not null but empty
 		assertNotNull("Test if there is valid Quotation arraylist to retrieve Quotation", QuotationList);
 
-		// Given an empty list, after adding 2 Quotations, and 1 is then removed, test that size of list is 1
+		// Given an empty list, after adding 2 Quotations, and 1 is then removed, test
+		// that size of list is 1
 
 		C206_CaseStudy.addQuotation(QuotationList, Q1);
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
@@ -161,8 +234,6 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Quotation arraylist size is 0", 0, apptList.size());
 
 	}
-
-	
 
 	@Test
 	public void addAppointmentTest() {

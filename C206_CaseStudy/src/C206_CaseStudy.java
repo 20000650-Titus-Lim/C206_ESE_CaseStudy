@@ -100,7 +100,7 @@ public class C206_CaseStudy {
 				break;
 			case 3:
 				// TODO: Register new users
-				regUser();
+				manageRegUser(accountList);
 				break;
 			case 4:
 				// Terminate Program
@@ -179,16 +179,20 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private void regUser() {
+	private void manageRegUser(ArrayList<Account> accountList) {
 		String name = Helper.readString("Enter name: ");
-		String role = Helper.readString("Enter role (Customer/Admin/Designer): ");
+		String role = Helper.readString("Enter role (User/Admin/Designer): ");
 		String email = Helper.readString("Enter email: ");
 		String password = Helper.readString("Enter password: ");
 		String status = "New";
 		Account Act1 = new Account(name, role, email, password, status);
-		accountList.add(Act1);
-		System.out.println(name + " Account Added!");
+		regUser(accountList, Act1);
 
+	}
+	
+	public static void regUser(ArrayList<Account> accountList, Account Act1) {
+		accountList.add(Act1);
+		System.out.println("Account Added!");
 	}
 
 	private void manageAccount() {
@@ -200,7 +204,7 @@ public class C206_CaseStudy {
 			switch (choice) {
 			case 1:
 				// TODO: Add Account
-				regUser();
+				manageRegUser(accountList);
 				break;
 			case 2:
 				// TODO: View All User
@@ -208,7 +212,7 @@ public class C206_CaseStudy {
 				break;
 			case 3:
 				// TODO: Delete Account
-				deleteAccount(accountList);
+				manageDeleteAccount();
 				break;
 			case 4:
 				// Exit
@@ -237,27 +241,35 @@ public class C206_CaseStudy {
 		return viewUser;
 	}
 
-	public static void deleteAccount(ArrayList<Account> accountList) {
+	private void manageDeleteAccount() {
 		viewUser(accountList);
 		String Inputname = Helper.readString("Enter account name to delete: ");
 		String output = "";
+		int code = 0;
 		for (Account A : accountList) {
 			if (Inputname.equals(A.getName())) {
 				char decision = Helper.readChar("Do you want to delete this appointment? (Y/N) > ");
 				if (decision == 'y' || decision == 'Y') {
-					accountList.remove(A);
+					code = accountList.indexOf(A);
+					deleteAccount(code, accountList);
 					output = Inputname + " Account has been deleted!";
 				}
 				else if(decision == 'N' || decision == 'n'){
 					output += "Deletion Cancled!";
 			}
-				else {
-					output = Inputname + " Account invalid!";
-				}
 				break;
+			}
+			else {
+				output = Inputname + " Account invalid!";
 			}
 		}
 		System.out.println(output);
+	}
+	
+	
+	public static boolean deleteAccount(int code, ArrayList<Account> accountList) {
+		accountList.remove(code);
+		return true;
 	}
 
 	// Manage Packages - Admin sub-menu
