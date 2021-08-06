@@ -144,6 +144,25 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
 
 	}
+	public void testQuotationDelete() {
+		// Test if Quotation list is not null but empty
+		assertNotNull("Test if there is valid Quotation arraylist to retrieve Quotation", QuotationList);
+
+		// Given an empty list, after adding 2 Quotations, and 1 is then removed, test that size of list is 1
+
+		C206_CaseStudy.addQuotation(QuotationList, Q1);
+		C206_CaseStudy.addQuotation(QuotationList, Q2);
+		assertSame("Check that first Quotation is added", Q1, apptList.get(0));
+		C206_CaseStudy.DeleteQuotation(QuotationList, 1);
+		assertEquals("Test that Quotation arraylist size is 1 after delete", 1, QuotationList.size());
+
+		// Test if the size of the list is 0 after removing 1 more appointment
+		C206_CaseStudy.DeleteQuotation(QuotationList, 2);
+		assertEquals("Test that Quotation arraylist size is 0", 0, apptList.size());
+
+	}
+
+	
 
 	@Test
 	public void addAppointmentTest() {

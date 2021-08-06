@@ -623,7 +623,7 @@ public class C206_CaseStudy {
 		System.out.println("Quotation successfully added!");
 	}
 
-	private static void DeleteQuotation(ArrayList<Quotation> QuotationList, int quotationID) {
+	public static void DeleteQuotation(ArrayList<Quotation> QuotationList, int quotationID) {
 		
 		String output = "";
 
