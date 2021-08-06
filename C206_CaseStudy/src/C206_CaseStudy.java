@@ -185,8 +185,17 @@ public class C206_CaseStudy {
 		String email = Helper.readString("Enter email: ");
 		String password = Helper.readString("Enter password: ");
 		String status = "New";
-		Account Act1 = new Account(name, role, email, password, status);
-		regUser(accountList, Act1);
+		if(!name.isEmpty() && !role.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+			if(role.equalsIgnoreCase("User") || role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("Designer")) {
+				Account Act1 = new Account(name, role, email, password, status);
+				regUser(accountList, Act1);
+			}
+			else {
+				System.out.println("Wrong role!");
+			}
+		}else {
+			System.out.println("Invliad Input!");
+		}
 
 	}
 	
