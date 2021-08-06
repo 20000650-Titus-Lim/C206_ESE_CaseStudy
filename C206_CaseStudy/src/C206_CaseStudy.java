@@ -261,7 +261,7 @@ public class C206_CaseStudy {
 				break;
 			case 2:
 				// TODO: View All Packages
-				managePackageView();
+				System.out.println(managePackageView(packageList));
 				break;
 			case 3:
 				// TODO: Delete Package
@@ -301,7 +301,7 @@ public class C206_CaseStudy {
 			System.out.println("Invalid choice");
 		} else {
 			if (confirm == 'y') {
-				packageList.remove(deleteCode);
+				deletePackage(deleteCode, packageList);
 				System.out.println("Package Deleted.");
 			} else if (confirm == 'n') {
 				System.out.println("Operation Cancelled.");
@@ -309,7 +309,11 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private void managePackageView() {
+	public static void deletePackage(int deleteCode, ArrayList<RenoPackage> packageList) {
+		packageList.remove(deleteCode);
+	}
+
+	public static String managePackageView(ArrayList<RenoPackage> packageList) {
 		Menu.printTitle("View All Packages");
 
 		String output = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date",
@@ -320,7 +324,7 @@ public class C206_CaseStudy {
 					p.getEndDate(), p.getAmount());
 		}
 
-		System.out.println(output);
+		return output;
 	}
 
 	private void managePackageAdd() {
@@ -338,7 +342,13 @@ public class C206_CaseStudy {
 		LocalDate dateStart = dateChecker(dc, start, "Start");
 		LocalDate dateEnd = dateChecker(dc, end, "End");
 
-		packageList.add(new RenoPackage(code, desc, dateStart, dateEnd, value));
+		RenoPackage newPackage = new RenoPackage(code, desc, dateStart, dateEnd, value);
+		addPackage(packageList, newPackage);
+	}
+
+	public static void addPackage(ArrayList<RenoPackage> packageList, RenoPackage p) {
+		packageList.add(p);
+		System.out.println("Package Added!");
 	}
 
 	private LocalDate dateChecker(dateCheck condition, String date, String type) {

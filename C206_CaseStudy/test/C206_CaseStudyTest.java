@@ -1,10 +1,13 @@
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import renovationACE.RenoPackage;
 
 public class C206_CaseStudyTest {
 	private Quotation Q1;
@@ -13,8 +16,12 @@ public class C206_CaseStudyTest {
 
 	private Appointment appt1;
 	private Appointment appt2;
+	private ArrayList<Appointment> apptList = new ArrayList<Appointment>();
 	
-	private ArrayList<Appointment> apptList;
+	private RenoPackage p1;
+	private RenoPackage p2;
+	private RenoPackage p3;
+	private ArrayList<RenoPackage> packageList = new ArrayList<RenoPackage>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -24,8 +31,10 @@ public class C206_CaseStudyTest {
 		
 		appt1 = new Appointment(1, "Qisthina", "Lucy", "27/09/2021", "12:30 pm", "Block 533 Choa Chu Kang Strt 12 #12-315");
 		appt2 = new Appointment(2, "Daniah", "Lucy", "30/09/2021", "4:00 pm", "Block 667 Yio Chu Kang Strt 4 #05-212");
-
-		apptList = new ArrayList<Appointment>();
+		
+		p1 = new RenoPackage(1, "Majulah Package", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 8, 31), 20000);
+		p2 = new RenoPackage(2, "New Year Package", LocalDate.of(2021, 12, 31), LocalDate.of(2022, 1, 12), 35000);
+		p3 = new RenoPackage(3, "Premium Terrace Package", LocalDate.of(2020, 4, 28),LocalDate.of(2021, 11, 16), 148000);
 	}
 
 	@Test
@@ -36,17 +45,59 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void managePackageAddTest() {
+		// Package list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid Package arraylist to add to", packageList);
 
+		// Given an empty list, after adding 1 appointment, the size of the list is 1 -
+		// normal
+		// The Package just added is as same as the first item of the list
+		C206_CaseStudy.addPackage(packageList, p1);
+		assertEquals("Check that Package arraylist size is 1", 1, packageList.size());
+		assertSame("Check that first Package is added", p1, packageList.get(0));
+
+		// Add another Package. Test the size of the list is 2 - normal
+		// The Package just added is as same as the second item of the list
+		C206_CaseStudy.addPackage(packageList, p2);
+		assertEquals("Check that Package arraylist size is 2", 2, packageList.size());
+		assertSame("Check that second Package is added", p2, packageList.get(1));
 	}
 
 	@Test
 	public void managePackageViewTest() {
+		// Package list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid Package arraylist to add to", packageList);
 
-	}
+		// Given an empty list, after adding 1 appointment, the size of the list is 1 -
+		// normal
+		// The Package just added is as same as the first item of the list
+		C206_CaseStudy.addPackage(packageList, p1);
+		assertEquals("Check that Package arraylist size is 1", 1, packageList.size());
+		assertSame("Check that first Package is added", p1, packageList.get(0));
+		
+		//Test if the expected output string same as the list of Appointments retrieved
+		//from the ArrayList
+		String viewPackages = C206_CaseStudy.managePackageView(packageList);
+		String viewPackagesTest = String.format("%-5s %-30s %-12s %-12s %s\n", "Code", "Description", "Start Date", "End Date", "Amount");
+		viewPackagesTest += String.format("%-5d %-30s %-12s %-12s $%.2f\n", 1, "Majulah Package", "2021-08-01",	"2021-08-31", 20000.00);
+		
+		assertEquals("Test that output of method is the same as expected output", viewPackages, viewPackagesTest);
+}
 
 	@Test
 	public void managePackageDeleteTest() {
+		// Package list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid Package arraylist to add to", packageList);
 
+		// Given an empty list, after adding 1 appointment, the size of the list is 1 -
+		// normal
+		// The Package just added is as same as the first item of the list
+		C206_CaseStudy.addPackage(packageList, p1);
+		assertEquals("Check that Package arraylist size is 1", 1, packageList.size());
+		assertSame("Check that first Package is added", p1, packageList.get(0));
+		
+		// Test if the size of the list is 0 after removing 1 more appointment
+		C206_CaseStudy.deletePackage(0, packageList);
+		assertEquals("Test that the size of the list is 0 when the only package is removed.", packageList.size(), 0);
 	}
 
 	@Test
