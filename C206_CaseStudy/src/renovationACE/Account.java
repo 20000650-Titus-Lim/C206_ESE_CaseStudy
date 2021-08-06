@@ -10,12 +10,12 @@ public class Account {
 	
 	
 	
-	public Account(String name, String role, String email, String password) {
+	public Account(String name, String role, String email, String password, String status) {
 		this.name = name;
 		this.role = role;
 		this.email = email;
 		this.password = password;
-		this.status = "New";
+		this.status = status;
 	}
 
 
@@ -58,6 +58,34 @@ public class Account {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
