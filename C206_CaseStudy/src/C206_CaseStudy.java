@@ -596,7 +596,7 @@ public class C206_CaseStudy {
 	private void manageDeleteAppointment() {
 		String output = "";
 		int apptID = Helper.readInt("Enter Appointment ID to delete > ");
-		int deletion = -1;
+		int deletion = 0;
 
 		for (Appointment a : apptList) {
 			if (apptID == a.getAppId()) {

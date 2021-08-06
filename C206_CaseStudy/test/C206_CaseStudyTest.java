@@ -283,7 +283,7 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllCamcorderlist", testOutput, allAppt);
 	}
-
+	@Test
 	public void deleteAppointmentTest() {
 		// Test if Appointment list is not null but empty -boundary
 		assertNotNull("Test if there is valid Appointment arraylist to retrieve appointment", apptList);
@@ -297,7 +297,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Appointment arraylist size is 1", 1, apptList.size());
 
 		// Test if the size of the list is 0 after removing 1 more appointment
-		C206_CaseStudy.deleteAppointment(2, apptList);
+		C206_CaseStudy.deleteAppointment(0, apptList);
 		assertEquals("Test that Appointment arraylist size is 0", 0, apptList.size());
 
 	}
