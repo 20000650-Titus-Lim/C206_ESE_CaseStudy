@@ -52,7 +52,7 @@ public class C206_CaseStudyTest {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
-
+	@Test
 	public void manageAccountAddTest() {
 		// Account list is not null, so that can add a new user - boundary
 		assertNotNull("Check if there is valid Account arraylist to add to", accountList);
@@ -215,7 +215,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
 
 	}
-
+	
 	public void testQuotationDelete() {
 		// Test if Quotation list is not null but empty
 		assertNotNull("Test if there is valid Quotation arraylist to retrieve Quotation", QuotationList);
