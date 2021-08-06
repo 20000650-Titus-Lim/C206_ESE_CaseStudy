@@ -67,7 +67,6 @@ public class C206_CaseStudy {
 			case 1:		
 				// TODO: Login for Users; NOTE ONLY USE runUser() when logged in successfully in
 				// another method; its just here temporarily
-				viewUser();
 				String Inputname = Helper.readString("Enter Username: ");
 				String Inputpass = Helper.readString("Enter Password: ");
 				for(Account A : accountList) {
