@@ -543,7 +543,7 @@ public class C206_CaseStudy {
 		Helper.line(150, "-");
 		System.out.println("VIEW APPOINTMENT");
 		Helper.line(150, "-");
-		String output = String.format("%-10d %-20s %-20s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
+		String output = String.format("%-10s %-20s %-20s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
 				"TIME", "ADDRESS");
 		output += retrieveAllAppointment(apptList);
 		System.out.println(output);
@@ -560,7 +560,9 @@ public class C206_CaseStudy {
 					apptList.remove(i);
 					output = "Appointment successfully deleted!";
 				}
-				break;
+				else {
+					output = "Appointment not deleted!";
+				}
 			} else {
 				output = "No such ID found!";
 			}
