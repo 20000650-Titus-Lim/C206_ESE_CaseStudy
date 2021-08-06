@@ -52,7 +52,7 @@ public class C206_CaseStudyTest {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
-
+	@Test
 	public void manageAccountAddTest() {
 		// Account list is not null, so that can add a new user - boundary
 		assertNotNull("Check if there is valid Account arraylist to add to", accountList);
@@ -215,7 +215,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
 
 	}
-
+	
 	public void testQuotationDelete() {
 		// Test if Quotation list is not null but empty
 		assertNotNull("Test if there is valid Quotation arraylist to retrieve Quotation", QuotationList);
@@ -287,7 +287,7 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllCamcorderlist", testOutput, allAppt);
 	}
-
+	@Test
 	public void deleteAppointmentTest() {
 		// Test if Appointment list is not null but empty -boundary
 		assertNotNull("Test if there is valid Appointment arraylist to retrieve appointment", apptList);
@@ -301,7 +301,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Appointment arraylist size is 1", 1, apptList.size());
 
 		// Test if the size of the list is 0 after removing 1 more appointment
-		C206_CaseStudy.deleteAppointment(2, apptList);
+		C206_CaseStudy.deleteAppointment(0, apptList);
 		assertEquals("Test that Appointment arraylist size is 0", 0, apptList.size());
 
 	}
