@@ -650,6 +650,7 @@ public class C206_CaseStudy {
 		String output = "";
 
 		for (Quotation Q : QuotationList) {
+			
 			if (input == Q.getRequestId()) {
 				deleteCode = QuotationList.indexOf(Q);
 				String ans = Helper.readString("Do you want to delete this appointment? (Y/N) > ");
