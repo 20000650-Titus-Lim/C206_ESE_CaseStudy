@@ -188,7 +188,7 @@ public class C206_CaseStudyTest {
 		// The item just added is as same as the first item of the list
 		assertSame("Test that new Quotation is added same as 1st item of the list?", Q1, QuotationList.get(0));
 
-		// Add another item. test The size of the list is 2?
+		// Add another item. test The size of the list is 2
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
 		assertEquals("Test that Quotation arraylist size is 2?", 2, QuotationList.size());
 	}
@@ -201,7 +201,7 @@ public class C206_CaseStudyTest {
 		// Given an empty list, after adding 2 item, the size of the list is 2
 		C206_CaseStudy.addQuotation(QuotationList, Q1);
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
-		assertEquals("Test if that Quotation arraylist size is 1?", 2, QuotationList.size());
+		assertEquals("Test if that Quotation arraylist size is 2", 2, QuotationList.size());
 
 		// Test if the expected output string same as the quotation list retrieved
 		// from the ArrayList
@@ -225,19 +225,31 @@ public class C206_CaseStudyTest {
 
 		C206_CaseStudy.addQuotation(QuotationList, Q1);
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
-		assertSame("Check that first Quotation is added", Q1, apptList.get(0));
+		assertSame("Check that first Quotation is added", Q1, QuotationList.get(0));
 		C206_CaseStudy.DeleteQuotation(1,QuotationList);
 		
 		assertEquals("Test that Quotation arraylist size is 1 after delete", 1, QuotationList.size());
+		
+		// Test that the correct variable is deleted.
+				String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList);
+
+				String QuotaionTest = String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 2, 2, "Kitchen", "Door", "TOM",
+						"10/8/2021", 2000);
+
+				assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
+
+		
+
+		
 
 		// Test if the size of the list is 0 after removing 1 Quotation
 		C206_CaseStudy.DeleteQuotation(2,QuotationList);
-		assertEquals("Test that Quotation arraylist size is 0", 0, apptList.size());
+		assertEquals("Test that Quotation arraylist size is 0", 0, QuotationList.size());
 		
 		//Test deleteing in an empty list the list size stays 0
 		C206_CaseStudy.DeleteQuotation(1,QuotationList);
 		
-		assertEquals("Test that Quotation arraylist size is still 0 even though there is nothing in the list", 0, apptList.size());
+		assertEquals("Test that Quotation arraylist size is still 0 even though there is nothing in the list", 0, QuotationList.size());
 
 	}
 
