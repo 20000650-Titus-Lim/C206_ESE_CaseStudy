@@ -67,7 +67,6 @@ public class C206_CaseStudy {
 			case 1:		
 				// TODO: Login for Users; NOTE ONLY USE runUser() when logged in successfully in
 				// another method; its just here temporarily
-				viewUser();
 				String Inputname = Helper.readString("Enter Username: ");
 				String Inputpass = Helper.readString("Enter Password: ");
 				for(Account A : accountList) {
@@ -540,7 +539,7 @@ public class C206_CaseStudy {
 
 	// Option 2 Viewing all the Appointment
 	public static String retrieveAllAppointment(ArrayList<Appointment> apptList) {
-		String output = "";
+		String output = ""; 
 		for (int i = 0; i < apptList.size(); i++) {
 			output += String.format("%-10d %-20s %-20s %-15s %-15s %-30s\n", apptList.get(i).getAppId(),
 					apptList.get(i).getCustName(), apptList.get(i).getdName(), apptList.get(i).getDateofApp(),
@@ -553,7 +552,7 @@ public class C206_CaseStudy {
 		Helper.line(150, "-");
 		System.out.println("VIEW APPOINTMENT");
 		Helper.line(150, "-");
-		String output = String.format("%-10d %-20s %-20s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
+		String output = String.format("%-10s %-20s %-20s %-15s %-15s %-30s\n", "ID", "CUSTOMER", "DESIGNER", "DATE",
 				"TIME", "ADDRESS");
 		output += retrieveAllAppointment(apptList);
 		System.out.println(output);
@@ -570,7 +569,9 @@ public class C206_CaseStudy {
 					apptList.remove(i);
 					output = "Appointment successfully deleted!";
 				}
-				break;
+				else {
+					output = "Appointment not deleted!";
+				}
 			} else {
 				output = "No such ID found!";
 			}
