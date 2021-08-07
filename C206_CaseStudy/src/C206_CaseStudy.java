@@ -448,8 +448,9 @@ public class C206_CaseStudy {
 
 			switch (choice) {
 			case 1:
-				String searchbyCat = Helper.readString("Search by > ");
 				System.out.println("Enter 'All' to view all output");
+
+				String searchbyCat = Helper.readString("Search by > ");
 				C206_CaseStudy.viewQuotation(QuotationList,searchbyCat);
 				break;
 			case 2:
@@ -634,28 +635,30 @@ public class C206_CaseStudy {
 
 	public static Quotation InputQuotation() {
 		Quotation Q = null;
+		String String_check = "([a-zA-Z]+)|([a-zA-Z]+ [a-zA-Z]+)";
+		String Int_check = "([1-9]|([1-9][0-9]+))";
 		String datePattern = "((0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-[12]\\d{3})";
 		
-		int RequestId = Helper.readInt("Enter Request ID > ");
-		int quotationId = Helper.readInt("Enter Quotation ID > ");
-		String RenoCategory = Helper.readString("Enter Category> ");
-		String items = Helper.readString("Enter Items > ");
+		String RequestId = Helper.readStringRegEx("Enter Request ID > ",Int_check);
+		String quotationId = Helper.readStringRegEx("Enter Quotation ID > ", Int_check);
+		String RenoCategory = Helper.readStringRegEx("Enter Category> ",String_check);
+		String items = Helper.readStringRegEx("Enter Items > ", String_check);
 		int itemPrice = Helper.readInt("Enter item price > $");
-		String DesignerName = Helper.readString("Enter Designer name > ");
+		String DesignerName = Helper.readStringRegEx("Enter Designer name > ",String_check);
 		String StartDate = Helper.readStringRegEx("Enter Date of Appointment (dd-mm-yyyy) > ", datePattern);
 		int totalAmount = Helper.readInt("Enter total amount > $");
 
-		// change to string
-		String RID = Integer.toString(RequestId);
-		String QID = Integer.toString(quotationId);
-		String AMT = Integer.toString(totalAmount);
-		String IP = Integer.toString(itemPrice);
+		String ItemPriceCheck = Integer.toString(itemPrice);
+		String totalAmountCheck = Integer.toString(totalAmount);
 		
-		if (RID.isEmpty() || QID.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || IP.isEmpty()|| DesignerName.isEmpty()
-				|| StartDate.isEmpty() || AMT.isEmpty()) {
+		if (RequestId.isEmpty() || quotationId.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || ItemPriceCheck.isEmpty()|| DesignerName.isEmpty()
+				|| StartDate.isEmpty() || totalAmountCheck.isEmpty()) {
 			System.out.println("Unable to add Quotation!");
 		} else {
-			Q = new Quotation(RequestId, quotationId, RenoCategory, items,itemPrice, DesignerName, StartDate, totalAmount);
+			int addRequestId = Integer.parseInt(RequestId);
+			int addquotationId = Integer.parseInt(quotationId);
+			
+			Q = new Quotation(addRequestId, addquotationId, RenoCategory, items,itemPrice, DesignerName, StartDate, totalAmount);
 
 //							System.out.println("Quotation successfully added!");
 		}
