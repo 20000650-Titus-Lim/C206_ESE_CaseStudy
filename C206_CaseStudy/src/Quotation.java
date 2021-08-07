@@ -6,16 +6,18 @@ public class Quotation {
 	private int QuotationId;
 	private String RenoCategory;
 	private String items;
+	private int itemPrice;
 	private String DesignerName;
 	private String StartDate;
 	private int totalAmount;
 
-		public Quotation(int requestId, int quotationId, String renoCategory, String items, String designerName,
+		public Quotation(int requestId, int quotationId, String renoCategory, String items, int itemPrice, String designerName,
 			String startDate, int totalAmount) {
 		RequestId = requestId;
 		QuotationId = quotationId;
 		RenoCategory = renoCategory;
 		this.items = items;
+		this.itemPrice = itemPrice;
 		DesignerName = designerName;
 		StartDate = startDate;
 		
@@ -36,6 +38,9 @@ public class Quotation {
 
 		public String getItems() {
 			return items;
+		}
+		public int getItemPrice() {
+			return itemPrice;
 		}
 
 		public String getDesignerName() {

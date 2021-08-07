@@ -596,7 +596,7 @@ public class C206_CaseStudy {
 		String output = "";
 		int apptID = Helper.readInt("Enter Appointment ID to delete > ");
 		int deletion = -1;
-		
+
 		for (Appointment a : apptList) {
 			if (apptID == a.getAppId()) {
 				deletion = apptList.indexOf(a);
@@ -639,6 +639,7 @@ public class C206_CaseStudy {
 		int quotationId = Helper.readInt("Enter Quotation ID > ");
 		String RenoCategory = Helper.readString("Enter Category> ");
 		String items = Helper.readString("Enter Items > ");
+		int itemPrice = Helper.readInt("Enter item price > $");
 		String DesignerName = Helper.readString("Enter Designer name > ");
 		String StartDate = Helper.readStringRegEx("Enter Date of Appointment (dd-mm-yyyy) > ", datePattern);
 		int totalAmount = Helper.readInt("Enter total amount > $");
@@ -647,12 +648,13 @@ public class C206_CaseStudy {
 		String RID = Integer.toString(RequestId);
 		String QID = Integer.toString(quotationId);
 		String AMT = Integer.toString(totalAmount);
-
-		if (RID.isEmpty() || QID.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || DesignerName.isEmpty()
+		String IP = Integer.toString(itemPrice);
+		
+		if (RID.isEmpty() || QID.isEmpty() || RenoCategory.isEmpty() || items.isEmpty() || IP.isEmpty()|| DesignerName.isEmpty()
 				|| StartDate.isEmpty() || AMT.isEmpty()) {
 			System.out.println("Unable to add Quotation!");
 		} else {
-			Q = new Quotation(RequestId, quotationId, RenoCategory, items, DesignerName, StartDate, totalAmount);
+			Q = new Quotation(RequestId, quotationId, RenoCategory, items,itemPrice, DesignerName, StartDate, totalAmount);
 
 //							System.out.println("Quotation successfully added!");
 		}
@@ -697,9 +699,9 @@ public class C206_CaseStudy {
 	public static String retrieveQuotation(ArrayList<Quotation> QuotationList) {
 		String output = "";
 		for (int i = 0; i < QuotationList.size(); i++) {
-			output += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+			output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
 					QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
-					QuotationList.get(i).getItems(), QuotationList.get(i).getDesignerName(),
+					QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
 					QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
 		}
 		return output;
@@ -709,8 +711,8 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 		System.out.println("VIEW Quotation");
 		Helper.line(80, "-");
-		String output = String.format("%-10s %-25s %-25s %-15s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID",
-				"CATEGORY", "ITEMS", "DESIGNER NAME ", "START DATE", "TOTAL AMOUNT");
+		String output = String.format("%-10s %-25s %-25s %-15s %-25s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID",
+				"CATEGORY", "ITEMS","ITEMS PRICE", "DESIGNER NAME ", "START DATE", "TOTAL AMOUNT");
 		output += retrieveQuotation(QuotationList);
 		System.out.println(output);
 	}
