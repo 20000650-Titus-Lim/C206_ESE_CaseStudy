@@ -448,8 +448,9 @@ public class C206_CaseStudy {
 
 			switch (choice) {
 			case 1:
-
-				C206_CaseStudy.viewQuotation(QuotationList);
+				String searchbyCat = Helper.readString("Search by > ");
+				System.out.println("Enter 'All' to view all output");
+				C206_CaseStudy.viewQuotation(QuotationList,searchbyCat);
 				break;
 			case 2:
 				Quotation Q = InputQuotation();
@@ -695,25 +696,95 @@ public class C206_CaseStudy {
 	public static void DeleteQuotation(int deleteCode, ArrayList<Quotation> QuotationList) {
 		QuotationList.remove(deleteCode);
 	}
-
-	public static String retrieveQuotation(ArrayList<Quotation> QuotationList) {
+	
+//	REQUEST ID", "QUOTATION ID",
+//	"CATEGORY", "ITEMS","ITEMS PRICE", "DESIGNER NAME ", "START DATE", "TOTAL AMOUNT
+	
+	public static String retrieveQuotation(ArrayList<Quotation> QuotationList, String searchbyCat) {
+		
 		String output = "";
+		String datePattern = "((0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-[12]\\d{3})";
+		
+	
+		
+		
 		for (int i = 0; i < QuotationList.size(); i++) {
-			output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
-					QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
-					QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
-					QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+			if(searchbyCat.equalsIgnoreCase("REQUEST ID")) {
+				int searchbyID = Helper.readInt("Enter request ID > ");
+				if(QuotationList.get(i).getRequestId() == searchbyID) {
+					output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+							QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+							QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
+							QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+				}else {
+					System.out.println("No such ID exist.");
+				}
+			}else if(searchbyCat.equalsIgnoreCase("QUOTATION ID")){
+				int searchbyQID = Helper.readInt("Enter QUOTATION ID > ");
+				if(QuotationList.get(i).getQuotationId() == searchbyQID) {
+					output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+							QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+							QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
+							QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+				}else {
+					System.out.println("No such ID exist.");
+				}
+			}else if(searchbyCat.equalsIgnoreCase("CATEGORY")) {
+				String searchbyCA = Helper.readString("Enter CATEGORY > ");
+				if(QuotationList.get(i).getRenoCategory().equalsIgnoreCase(searchbyCA)) {
+					output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+							QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+							QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
+							QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+				}else {
+					System.out.println("No such category exist.");
+				}
+			}else if(searchbyCat.equalsIgnoreCase("name")) {
+				String searchbyName = Helper.readString("Enter designer name > ");
+				if(QuotationList.get(i).getDesignerName().equalsIgnoreCase(searchbyName)) {
+					output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+							QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+							QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
+							QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+				}else {
+					System.out.println("No such category exist.");
+				}
+			}else if(searchbyCat.equalsIgnoreCase("name")) {
+				String searchbyDate = Helper.readStringRegEx("Enter date (dd-mm-yyyy) > ",datePattern);
+				if(QuotationList.get(i).getStartDate().equalsIgnoreCase(searchbyDate)) {
+					output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+							QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+							QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
+							QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+				}else {
+					System.out.println("No such category exist.");
+				}
+			}else if(searchbyCat.equalsIgnoreCase("all")) {
+				output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+						QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+						QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
+						QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+			}else {
+				System.out.print("Unable to search by " + searchbyCat + ". Please Try again.");
+			}
 		}
+//		String output = "";
+//		for (int i = 0; i < QuotationList.size(); i++) {
+//			output += String.format("%-10d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", QuotationList.get(i).getRequestId(),
+//					QuotationList.get(i).getQuotationId(), QuotationList.get(i).getRenoCategory(),
+//					QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
+//					QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
+//		}
 		return output;
 	}
 
-	public static void viewQuotation(ArrayList<Quotation> QuotationList) {
+	public static void viewQuotation(ArrayList<Quotation> QuotationList, String searchbyCat) {
 		Helper.line(80, "-");
 		System.out.println("VIEW Quotation");
 		Helper.line(80, "-");
 		String output = String.format("%-10s %-25s %-25s %-15s %-25s %-15s %-15s %-30s\n", " REQUEST ID", "QUOTATION ID",
 				"CATEGORY", "ITEMS","ITEMS PRICE", "DESIGNER NAME ", "START DATE", "TOTAL AMOUNT");
-		output += retrieveQuotation(QuotationList);
+		output += retrieveQuotation(QuotationList, searchbyCat);
 		System.out.println(output);
 	}
 
