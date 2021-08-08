@@ -11,7 +11,7 @@ public class Quotation {
 	private String StartDate;
 	private int totalAmount;
 
-		public Quotation(int requestId, int quotationId, String renoCategory, String items, int itemPrice, String designerName,
+		public Quotation(int quotationId, int requestId, String renoCategory, String items, int itemPrice, String designerName,
 			String startDate, int totalAmount) {
 		RequestId = requestId;
 		QuotationId = quotationId;

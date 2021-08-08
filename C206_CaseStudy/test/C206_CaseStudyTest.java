@@ -206,6 +206,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
 		assertEquals("Test if that Quotation arraylist size is 2", 2, QuotationList.size());
 
+		
 		// Test if the expected output string same as the quotation list retrieved
 		// from the ArrayList
 		String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList,"all");
