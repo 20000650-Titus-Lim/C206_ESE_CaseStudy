@@ -10,10 +10,10 @@ public class Quotation {
 	private String DesignerName;
 	private String StartDate;
 	private int totalAmount;
-	
+	private String selected;
 
 		public Quotation(int quotationId, int requestId, String renoCategory, String items, int itemPrice, String designerName,
-			String startDate, int totalAmount) {
+			String startDate, int totalAmount, String selected) {
 		RequestId = requestId;
 		QuotationId = quotationId;
 		RenoCategory = renoCategory;
@@ -21,6 +21,7 @@ public class Quotation {
 		this.itemPrice = itemPrice;
 		DesignerName = designerName;
 		StartDate = startDate;
+		this.selected = selected;
 		
 		this.totalAmount = totalAmount;
 	}
@@ -54,6 +55,9 @@ public class Quotation {
 
 		public int getTotalAmount() {
 			return totalAmount;
+		}
+		public String getSelected() {
+			return selected;
 		}
 		
 		
