@@ -741,7 +741,7 @@ public class C206_CaseStudy {
 				}else {
 					System.out.println("No such category exist.");
 				}
-			}else if(searchbyCat.equalsIgnoreCase("name")) {
+			}else if(searchbyCat.equalsIgnoreCase("designer name")) {
 				String searchbyName = Helper.readString("Enter designer name > ");
 				if(QuotationList.get(i).getDesignerName().equalsIgnoreCase(searchbyName)) {
 					output += String.format("%-15d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", 
@@ -749,9 +749,9 @@ public class C206_CaseStudy {
 							QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
 							QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
 				}else {
-					System.out.println("No such category exist.");
+					System.out.println("No such name exist.");
 				}
-			}else if(searchbyCat.equalsIgnoreCase("name")) {
+			}else if(searchbyCat.equalsIgnoreCase("date") || searchbyCat.equalsIgnoreCase("start date")) {
 				String searchbyDate = Helper.readStringRegEx("Enter date (dd-mm-yyyy) > ",datePattern);
 				if(QuotationList.get(i).getStartDate().equalsIgnoreCase(searchbyDate)) {
 					output += String.format("%-15d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n", 
@@ -759,7 +759,7 @@ public class C206_CaseStudy {
 							QuotationList.get(i).getItems(),QuotationList.get(i).getItemPrice(), QuotationList.get(i).getDesignerName(),
 							QuotationList.get(i).getStartDate(), QuotationList.get(i).getTotalAmount());
 				}else {
-					System.out.println("No such category exist.");
+					System.out.println("No such date exist.");
 				}
 			}else if(searchbyCat.equalsIgnoreCase("all")) {
 				output += String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d\n",
