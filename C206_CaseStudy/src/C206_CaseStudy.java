@@ -769,6 +769,7 @@ public class C206_CaseStudy {
 			}else {
 				System.out.print("Unable to search by " + searchbyCat + ". Please Try again.");
 			}
+			
 		}
 
 		return output;

@@ -10,6 +10,7 @@ public class Quotation {
 	private String DesignerName;
 	private String StartDate;
 	private int totalAmount;
+	
 
 		public Quotation(int quotationId, int requestId, String renoCategory, String items, int itemPrice, String designerName,
 			String startDate, int totalAmount) {
