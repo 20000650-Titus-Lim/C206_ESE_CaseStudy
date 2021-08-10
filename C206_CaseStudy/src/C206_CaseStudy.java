@@ -52,6 +52,9 @@ public class C206_CaseStudy {
 		genMenuAdmin();
 		genMenuAdminUser();
 		genMenuAdminPackage(); // Manage Packages
+		
+		Quotation Q0 = new Quotation(1, 1, "Living Room", "Door", 100, "Nicholas", "8-8-2021", 1500, "-");
+		C206_CaseStudy.addQuotation(QuotationList, Q0);
 
 		accountList.add(Acc1);
 		accountList.add(Acc2);
@@ -841,7 +844,7 @@ public class C206_CaseStudy {
 	private void ManageUpdateQuotation() {
 		String datePattern = "((0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-[12]\\d{3})";
 		String category = "(kitchen|living room|bedroom|toilet|storage room|KITCHEN|LIVING ROOM|BEDROOM|TOILET|STORAGE ROOM|Kitchen|Living Room|Bedroom|Toilet|Storage Room)";
-
+		
 		updateMenu();
 		int optionUpdate = Helper.readInt("Enter an option > ");
 		if (optionUpdate == 1) {
@@ -861,7 +864,7 @@ public class C206_CaseStudy {
 					String selected = Q.getSelected();
 					Quotation Q1 = new Quotation(QuotationId, RequestId, NewCat, Item, ItemPrice, DName, date, amt,
 							selected);
-					updateQuotation(QuotationList, Q1, updateNum);
+					updateQuotation(QuotationList, Q1, updateNum-1);
 					return;
 				} else {
 					System.out.println("This ID does not exists");
@@ -871,7 +874,7 @@ public class C206_CaseStudy {
 		} else if (optionUpdate == 2) {
 
 			int updateNum = Helper.readInt("Enter quotation ID > ");
-			String newDate = Helper.readStringRegEx("Enter new date > ", datePattern);
+			String newDate = Helper.readStringRegEx("Enter new date(dd-mm-yyyy) > ", datePattern);
 			for (Quotation Q : QuotationList) {
 				if (updateNum == Q.getQuotationId()) {
 					int QuotationId = Q.getQuotationId();
@@ -884,7 +887,7 @@ public class C206_CaseStudy {
 					String selected = Q.getSelected();
 					Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, newDate, amt,
 							selected);
-					updateQuotation(QuotationList, Q1, updateNum);
+					updateQuotation(QuotationList, Q1, updateNum-1);
 					return;
 				} else {
 					System.out.println("This ID does not exists");
@@ -910,17 +913,21 @@ public class C206_CaseStudy {
 				if (updateNum == Q.getQuotationId()) {
 					if (selectOption == 1) {
 						selected = "Selected";
+						Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, date, amt,
+								selected);
+						updateQuotation(QuotationList, Q1, updateNum-1);
 					} else if (selectOption == 2) {
 						selected = "-";
+						selected = "Selected";
+						Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, date, amt,
+								selected);
+						updateQuotation(QuotationList, Q1, updateNum-1);
 					} else {
 						System.out.println("Invalid option!");
 					}
 				}
-				System.out.println("Select test = " + selected);
 
-				Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, date, amt,
-						selected);
-				updateQuotation(QuotationList, Q1, updateNum);
+				
 				return;
 			}
 		} else if (optionUpdate == 4) {
