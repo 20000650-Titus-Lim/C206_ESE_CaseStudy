@@ -887,6 +887,7 @@ public class C206_CaseStudy {
 				} else {
 					System.out.println("This ID does not exists");
 				}
+				
 			}
 			
 		} else if (optionUpdate == 3) {

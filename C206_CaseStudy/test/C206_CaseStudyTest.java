@@ -291,6 +291,7 @@ public class C206_CaseStudyTest {
 	
 	}
 
+	
 	@Test
 	public void addAppointmentTest() {
 		// Appointments list is not null, so that can add a new item - boundary
