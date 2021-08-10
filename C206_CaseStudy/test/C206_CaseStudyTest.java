@@ -265,8 +265,8 @@ public class C206_CaseStudyTest {
 		// test that quotation category update will change from living room to the new value "kitchen"
 		C206_CaseStudy.addQuotation(QuotationList, Q1);
 		Quotation Q3 = new Quotation(1, 1, "Kitchen", "Door", 100, "Nicholas", "8-8-2021", 1500, "-");
-		String QuotaionTest = String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d %-15s\n", 8, 1,
-				"kitchen", "Door", 100, "Nicholas", "8-8-2021", 1500, "-");
+		String QuotaionTest = String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d %-15s\n", 1, 1,
+				"Kitchen", "Door", 100, "Nicholas", "8-8-2021", 1500, "-");
 		C206_CaseStudy.updateQuotation(QuotationList, Q3, 0);
 		String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList, "all");
 		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
@@ -274,7 +274,7 @@ public class C206_CaseStudyTest {
 		// test that date update will change from 8-8-2021 to the new value "6-6-2021"
 
 		Quotation Q4 = new Quotation(1, 1, "Kitchen", "Door", 100, "Nicholas", "6-6-2021", 1500, "-");
-		String QuotaionTest1 = String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d %-15s\n", 8, 1,
+		String QuotaionTest1 = String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d %-15s\n", 1, 1,
 				"Kitchen", "Door", 100, "Nicholas", "6-6-2021", 1500, "-");
 		C206_CaseStudy.updateQuotation(QuotationList, Q4, 0);
 		String quotationView1 = C206_CaseStudy.retrieveQuotation(QuotationList, "all");
