@@ -923,6 +923,7 @@ public class C206_CaseStudy {
 			}
 		} else if (optionUpdate == 4) {
 			return;
+			
 		} else {
 			System.out.println("Invalid option");
 			return;
