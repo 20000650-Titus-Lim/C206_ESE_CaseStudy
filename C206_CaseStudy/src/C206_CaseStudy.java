@@ -885,6 +885,7 @@ public class C206_CaseStudy {
 					System.out.println("This ID does not exists");
 				}
 			}
+			
 		} else if (optionUpdate == 3) {
 			System.out.println("\n1.Select\n2.Unselect");
 			String selected = "";

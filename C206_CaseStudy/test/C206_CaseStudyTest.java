@@ -245,6 +245,7 @@ public class C206_CaseStudyTest {
 
 	}
 	
+	
 	@Test
 	public void SearchByTest() {
 		// Test if Quotation list is not null but empty
