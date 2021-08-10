@@ -279,7 +279,6 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.updateQuotation(QuotationList, Q4, 0);
 		String quotationView1 = C206_CaseStudy.retrieveQuotation(QuotationList, "all");
 		assertEquals("Test that output of method is the same as expected output", quotationView1, QuotaionTest1);
-
 	
 	}
 
