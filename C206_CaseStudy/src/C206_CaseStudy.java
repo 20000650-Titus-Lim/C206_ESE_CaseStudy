@@ -556,7 +556,6 @@ public class C206_CaseStudy {
 		String address = Helper.readString("Enter Address > ");
 
 		if (dName.isEmpty() || address.isEmpty() || s.isEmpty() || name.isEmpty()) {
-			System.out.println("Unable to add appointment!");
 			appt = null;
 		} else {
 			appt = new Appointment(id, name, dName, date, time, address);
@@ -566,8 +565,12 @@ public class C206_CaseStudy {
 	}
 
 	public static void addAppointment(ArrayList<Appointment> apptList, Appointment appt) {
-		apptList.add(appt);
-		System.out.println("Appointment successfully added!");
+		if (appt != null) {
+			apptList.add(appt);
+			System.out.println("Appointment successfully added!");
+		} else {
+			System.out.println("Unable to add appointment!");
+		}
 	}
 
 	// Option 2 Viewing all the Appointment
