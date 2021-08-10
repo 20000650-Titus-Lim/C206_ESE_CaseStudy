@@ -34,8 +34,8 @@ public class C206_CaseStudyTest {
 		Acc1 = new Account("Vedha", "Admin", "Vedha@gmail.com", "Class", "Confirmed");
 		Acc2 = new Account("Vedha1", "User", "Vedha1@gmail.com", "Class1", "Confirmed");
 
-		Q1 = new Quotation(1, 1, "Living Room", "Door", "Nicholas", "8-8-2021", 1500);
-		Q2 = new Quotation(2, 2, "Kitchen", "Door", "TOM", "10-8-2021", 2000);
+		Q1 = new Quotation(1, 1, "Living Room", "Door",100, "Nicholas", "8-8-2021", 1500,"-");
+		Q2 = new Quotation(2, 2, "Kitchen", "Door", 100,"TOM", "10-8-2021", 2000,"-");
 
 		appt1 = new Appointment(1, "Qisthina", "Lucy", "27/09/2021", "12:30 pm",
 				"Block 533 Choa Chu Kang Strt 12 #12-315");
@@ -206,14 +206,15 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addQuotation(QuotationList, Q2);
 		assertEquals("Test if that Quotation arraylist size is 2", 2, QuotationList.size());
 
+		
 		// Test if the expected output string same as the quotation list retrieved
 		// from the ArrayList
-		String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList);
+		String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList,"all");
 
-		String QuotaionTest = String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 1, 1, "Living Room", "Door",
-				"Nicholas", "8-8-2021", 1500);
-		QuotaionTest += String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 2, 2, "Kitchen", "Door", "TOM",
-				"10-8-2021", 2000);
+		String QuotaionTest = String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d %-15s\n", 1, 1, "Living Room", "Door",
+				 100 , "Nicholas", "8-8-2021", 1500,"-");
+		QuotaionTest += String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d %-15s\n", 2, 2, "Kitchen", "Door",100, "TOM",
+				"10-8-2021", 2000,"-");
 
 		assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
 
@@ -234,16 +235,13 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that Quotation arraylist size is 1 after delete", 1, QuotationList.size());
 
-		
 		// Test that the correct variable is deleted.
-				String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList);
+		String quotationView = C206_CaseStudy.retrieveQuotation(QuotationList,"all");
 
+		String QuotaionTest = String.format("%-18d %-25d %-25s %-15s %-25d %-15s %-15s %-30d %-15s\n", 1, 1, "Living Room", "Door",100,
+				"Nicholas", "8-8-2021", 1500,"-");
 
-				String QuotaionTest = String.format("%-10d %-25d %-25s %-15s %-15s %-15s %-30d\n", 1, 1, "Living Room", "Door",
-						"Nicholas", "8-8-2021", 1500);
-				
-				assertEquals("Test that output of method is the same as expected output", quotationView, QuotaionTest);
-
+		assertEquals("Test that output of method is the same as expected output",quotationView, QuotaionTest);
 
 	}
 
