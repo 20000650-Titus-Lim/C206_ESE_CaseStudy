@@ -78,6 +78,13 @@ public class C206_CaseStudyTest {
 		// Add another item. test The size of the list is not bigger than 2? -Error
 		// The item just added is as same as the second item of the list
 		assertNotEquals("Check that Account arraylist size is not bigger than 2", 3, accountList.size());
+		
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		//Test that empty list remains same after adding a null.
+		accountList.clear();
+		accountList.add(null);
+		assertEquals("Test that after adding null the list remains empty", 1 , accountList.size());
 	}
 
 	@Test
@@ -85,12 +92,16 @@ public class C206_CaseStudyTest {
 		// Test if Item list is not null but empty -boundary
 		assertNotNull("Test if there is valid Account arraylist to retrieve item", accountList);
 
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+		
 		// Given an empty list, after adding 1 appointment, the size of the list is 1 -
 		// normal
 		// The Package just added is as same as the first item of the list
 		C206_CaseStudy.regUser(accountList, Acc1);
 		assertEquals("Check that Account arraylist size is 1", 1, accountList.size());
-		assertSame("Check that first Package is added", Acc1, accountList.get(0));
+		assertSame("Check that first Account is added", Acc1, accountList.get(0));
+		
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// Test if the expected output string same as the list of Appointments retrieved
 		// from the ArrayList
@@ -106,14 +117,27 @@ public class C206_CaseStudyTest {
 		// Account list is not null, so that can add a new item - boundary
 		assertNotNull("Check if there is valid Account arraylist to add to", accountList);
 
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		//Delete only the Account with the name and not any others.
+		accountList.add(Acc1);
+		if(Acc1.getName().equals("Vedha")) {
+			accountList.remove(0);
+		}
+		assertEquals("Check that Account arraylist size is 0", 0, accountList.size());
+		
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+		
 		//
 		C206_CaseStudy.regUser(accountList, Acc1);
-		assertEquals("Check that Package arraylist size is 1", 1, accountList.size());
-		assertSame("Check that first Package is added", Acc1, accountList.get(0));
+		assertEquals("Check that Account arraylist size is 1", 1, accountList.size());
+		assertSame("Check that first Account is added", Acc1, accountList.get(0));
 
+		// ------------------------------------------------------------------------------------------------------------------------------------------------
+		
 		// Test if the size of the list is 0 after removing 1 more appointment
 		C206_CaseStudy.deleteAccount(0, accountList);
-		assertEquals("Test that the size of the list is 0 when the only package is removed.", accountList.size(), 0);
+		assertEquals("Test that the size of the list is 0 when the only Account is removed.", accountList.size(), 0);
 	}
 
 	@Test
@@ -304,11 +328,13 @@ public class C206_CaseStudyTest {
 
 	@After
 	public void tearDown() throws Exception {
+		Acc1 = null;
+		Acc2 = null;
+		accountList = null;
 		Q1 = null;
 		Q2 = null;
 		appt1 = null;
 		appt2 = null;
-
 		apptList = null;
 	}
 

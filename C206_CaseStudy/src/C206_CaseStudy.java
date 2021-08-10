@@ -243,6 +243,7 @@ public class C206_CaseStudy {
 	public static String viewUser(ArrayList<Account> accountList) {
 		String viewUser = String.format("%-15s %-11s %-20s %-20s %-10s\n", "Account Name", "Role", "Email", "Password",
 				"Status");
+		
 		for (int x = 0; x < accountList.size(); x++) {
 			viewUser += String.format("%-15s %-11s %-20s %-20s %-10s\n", accountList.get(x).getName(),
 					accountList.get(x).getRole(), accountList.get(x).getEmail(), accountList.get(x).getPassword(),
