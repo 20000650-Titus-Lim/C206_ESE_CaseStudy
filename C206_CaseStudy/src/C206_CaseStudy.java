@@ -63,6 +63,7 @@ public class C206_CaseStudy {
 		accountList.add(Acc8);
 
 		int choice = -1;
+		
 
 		while (choice != 4) {
 			menLogin.printMenu("LOGIN");
@@ -892,10 +893,10 @@ public class C206_CaseStudy {
 			}
 			
 		} else if (optionUpdate == 3) {
-			System.out.println("\n1.Select\n2.Unselect");
+			System.out.println("1.Select\n2.Unselect");
 			String selected = "";
 			int updateNum = Helper.readInt("Enter quotation ID > ");
-			int selectOption = Helper.readInt("Enter option(1,2) > ");
+			int selectOption = Helper.readInt("Enter option(1/2) > ");
 			for (Quotation Q : QuotationList) {
 				int QuotationId = Q.getQuotationId();
 				int RequestId = Q.getRequestId();
@@ -924,6 +925,7 @@ public class C206_CaseStudy {
 			}
 		} else if (optionUpdate == 4) {
 			return;
+			
 		} else {
 			System.out.println("Invalid option");
 			return;
