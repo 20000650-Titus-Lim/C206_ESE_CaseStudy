@@ -63,6 +63,7 @@ public class C206_CaseStudy {
 		accountList.add(Acc8);
 
 		int choice = -1;
+		
 
 		while (choice != 4) {
 			menLogin.printMenu("LOGIN");
