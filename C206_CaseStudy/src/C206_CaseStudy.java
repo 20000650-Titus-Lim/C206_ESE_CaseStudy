@@ -860,7 +860,7 @@ public class C206_CaseStudy {
 					String selected = Q.getSelected();
 					Quotation Q1 = new Quotation(QuotationId, RequestId, NewCat, Item, ItemPrice, DName, date, amt,
 							selected);
-					updateQuotation(QuotationList, Q1, updateNum);
+					updateQuotation(QuotationList, Q1, updateNum-1);
 					return;
 				} else {
 					System.out.println("This ID does not exists");
@@ -883,7 +883,7 @@ public class C206_CaseStudy {
 					String selected = Q.getSelected();
 					Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, newDate, amt,
 							selected);
-					updateQuotation(QuotationList, Q1, updateNum);
+					updateQuotation(QuotationList, Q1, updateNum-1);
 					return;
 				} else {
 					System.out.println("This ID does not exists");
@@ -909,17 +909,21 @@ public class C206_CaseStudy {
 				if (updateNum == Q.getQuotationId()) {
 					if (selectOption == 1) {
 						selected = "Selected";
+						Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, date, amt,
+								selected);
+						updateQuotation(QuotationList, Q1, updateNum-1);
 					} else if (selectOption == 2) {
 						selected = "-";
+						selected = "Selected";
+						Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, date, amt,
+								selected);
+						updateQuotation(QuotationList, Q1, updateNum-1);
 					} else {
 						System.out.println("Invalid option!");
 					}
 				}
-				System.out.println("Select test = " + selected);
 
-				Quotation Q1 = new Quotation(QuotationId, RequestId, Categ, Item, ItemPrice, DName, date, amt,
-						selected);
-				updateQuotation(QuotationList, Q1, updateNum);
+				
 				return;
 			}
 		} else if (optionUpdate == 4) {
