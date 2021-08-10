@@ -259,7 +259,6 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.retrieveQuotation(QuotationList, "living room");
 		assertSame("Check that the filter will only show living room", Q1, QuotationList.get(0));
 	}
-	
 
 	@Test
 	public void UpdateTest() {
