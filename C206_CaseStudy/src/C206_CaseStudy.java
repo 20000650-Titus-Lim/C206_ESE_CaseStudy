@@ -63,6 +63,7 @@ public class C206_CaseStudy {
 		accountList.add(Acc8);
 
 		int choice = -1;
+		
 
 		while (choice != 4) {
 			menLogin.printMenu("LOGIN");
@@ -564,7 +565,6 @@ public class C206_CaseStudy {
 		String address = Helper.readString("Enter Address > ");
 
 		if (dName.isEmpty() || address.isEmpty() || s.isEmpty() || name.isEmpty()) {
-			System.out.println("Unable to add appointment!");
 			appt = null;
 		} else {
 			appt = new Appointment(id, name, dName, date, time, address);
@@ -574,8 +574,12 @@ public class C206_CaseStudy {
 	}
 
 	public static void addAppointment(ArrayList<Appointment> apptList, Appointment appt) {
-		apptList.add(appt);
-		System.out.println("Appointment successfully added!");
+		if (appt != null) {
+			apptList.add(appt);
+			System.out.println("Appointment successfully added!");
+		} else {
+			System.out.println("Unable to add appointment!");
+		}
 	}
 
 	// Option 2 Viewing all the Appointment
@@ -884,12 +888,14 @@ public class C206_CaseStudy {
 				} else {
 					System.out.println("This ID does not exists");
 				}
+				
 			}
+			
 		} else if (optionUpdate == 3) {
-			System.out.println("\n1.Select\n2.Unselect");
+			System.out.println("1.Select\n2.Unselect");
 			String selected = "";
 			int updateNum = Helper.readInt("Enter quotation ID > ");
-			int selectOption = Helper.readInt("Enter option(1,2) > ");
+			int selectOption = Helper.readInt("Enter option(1/2) > ");
 			for (Quotation Q : QuotationList) {
 				int QuotationId = Q.getQuotationId();
 				int RequestId = Q.getRequestId();
@@ -918,6 +924,7 @@ public class C206_CaseStudy {
 			}
 		} else if (optionUpdate == 4) {
 			return;
+			
 		} else {
 			System.out.println("Invalid option");
 			return;
