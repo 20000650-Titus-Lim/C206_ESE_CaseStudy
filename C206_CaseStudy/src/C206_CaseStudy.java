@@ -76,10 +76,10 @@ public class C206_CaseStudy {
 			case 1:
 				// TODO: Login for Users; NOTE ONLY USE runUser() when logged in successfully in
 				// another method; its just here temporarily
-				String Inputname = Helper.readString("Enter Username: ");
+				String CEmail = Helper.readString("Enter Email: ");
 				String Inputpass = Helper.readString("Enter Password: ");
 				for (Account A : accountList) {
-					if (A.getPassword().equals(Inputpass) && A.getName().equals(Inputname)
+					if (A.getPassword().equals(Inputpass) && A.getEmail().equals(CEmail)
 							&& A.getRole().equals("User")) {
 						runUser();
 					} else {
@@ -91,14 +91,14 @@ public class C206_CaseStudy {
 			case 2:
 				// TODO: Login for Admins; NOTE ONLY USE runAdmin() when logged in successfully
 				// in another method; its just here temporarily
-				String InputAdminname = Helper.readString("Enter Username: ");
+				String AEmail = Helper.readString("Enter Email: ");
 				String InputAdminpass = Helper.readString("Enter Password: ");
 				for (Account A : accountList) {
-					if (A.getPassword().equals(InputAdminpass) && A.getName().equals(InputAdminname)
+					if (A.getPassword().equals(InputAdminpass) && A.getEmail().equals(AEmail)
 							&& A.getRole().equals("Admin")) {
 						runAdmin();
 					} else {
-						output = "Invalid Username or Password";
+						output = "Invalid Email or Password";
 					}
 				}
 				System.out.println(output);
