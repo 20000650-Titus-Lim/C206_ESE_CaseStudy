@@ -130,6 +130,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that Account arraylist size is 0", 0, accountList.size());
 		
 		// ------------------------------------------------------------------------------------------------------------------------------------------------
+		//Delete 1 account and check the array if it is any user are left.
 		C206_CaseStudy.regUser(accountList, Acc1);
 		assertEquals("Check that Account arraylist size is 1", 1, accountList.size());
 		assertSame("Check that first Account is added", Acc1, accountList.get(0));
