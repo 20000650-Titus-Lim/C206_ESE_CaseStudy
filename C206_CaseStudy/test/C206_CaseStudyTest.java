@@ -108,8 +108,7 @@ public class C206_CaseStudyTest {
 	public void manageAccountDeleteTest() {
 		// Account list is not null, so that can add a new item - boundary
 		assertNotNull("Check if there is valid Account arraylist to add to", accountList);
-
-		//
+		
 		C206_CaseStudy.regUser(accountList, Acc1);
 		assertEquals("Check that Package arraylist size is 1", 1, accountList.size());
 		assertSame("Check that first Package is added", Acc1, accountList.get(0));
