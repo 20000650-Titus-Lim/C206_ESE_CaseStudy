@@ -891,10 +891,10 @@ public class C206_CaseStudy {
 			}
 			
 		} else if (optionUpdate == 3) {
-			System.out.println("\n1.Select\n2.Unselect");
+			System.out.println("1.Select\n2.Unselect");
 			String selected = "";
 			int updateNum = Helper.readInt("Enter quotation ID > ");
-			int selectOption = Helper.readInt("Enter option(1,2) > ");
+			int selectOption = Helper.readInt("Enter option(1/2) > ");
 			for (Quotation Q : QuotationList) {
 				int QuotationId = Q.getQuotationId();
 				int RequestId = Q.getRequestId();
