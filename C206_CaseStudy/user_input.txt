@@ -2,17 +2,14 @@
 Qis1
 Class1
 2
+1
 2
-12
-lucy
-qis
+3
+Qis
+Lucy
 12/12/2021
 12:30 pm
-Blk 564
-1
-3
-12
-y
+Blk 563
 1
 4
 3
